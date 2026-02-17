@@ -30,7 +30,7 @@ private val menuItems = listOf(
     MoreMenuItem("\uD83D\uDCB3", "Manajemen Hutang", "Kelola hutang & cicilan", null),
     MoreMenuItem("\uD83D\uDCC5", "Kewajiban & Jadwal", "Biaya tetap & jadwal kerja", null),
     MoreMenuItem("\uD83C\uDFAF", "Detail Target", "Lihat perhitungan target harian", null),
-    MoreMenuItem("\uD83D\uDCCB", "Data Perlu Dicek", "Review data hasil capture", null),
+    MoreMenuItem("\uD83D\uDCCB", "Data Perlu Dicek", "Review data hasil capture", Screen.DataReview.route),
     MoreMenuItem("\uD83D\uDCF7", "Capture Manager", "Pengaturan auto capture", Screen.CaptureManager.route)
 )
 
