@@ -16,6 +16,8 @@ import com.driverfinance.ui.screen.debt.AddDebtScreen
 import com.driverfinance.ui.screen.debt.DebtDetailScreen
 import com.driverfinance.ui.screen.debt.DebtListScreen
 import com.driverfinance.ui.screen.more.MoreScreen
+import com.driverfinance.ui.screen.obligation.FixedExpenseScreen
+import com.driverfinance.ui.screen.obligation.WorkScheduleScreen
 import com.driverfinance.ui.screen.order.OrderScreen
 import com.driverfinance.ui.screen.quickentry.QuickEntryScreen
 import com.driverfinance.ui.screen.review.DataReviewScreen
@@ -89,6 +91,15 @@ fun AppNavigation(
         }
         composable(Screen.AddDebt.route) {
             AddDebtScreen(onBack = { navController.popBackStack() })
+        }
+        composable(Screen.FixedExpense.route) {
+            FixedExpenseScreen(
+                onBack = { navController.popBackStack() },
+                onAddExpense = { /* TODO: add expense form */ }
+            )
+        }
+        composable(Screen.WorkSchedule.route) {
+            WorkScheduleScreen(onBack = { navController.popBackStack() })
         }
     }
 }
