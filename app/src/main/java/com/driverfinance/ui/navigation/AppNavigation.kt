@@ -30,7 +30,11 @@ fun AppNavigation(
         composable(Screen.Dashboard.route) { DashboardScreen() }
         composable(Screen.Order.route) { OrderScreen() }
         composable(Screen.Chat.route) { ChatScreen() }
-        composable(Screen.QuickEntry.route) { QuickEntryScreen() }
+        composable(Screen.QuickEntry.route) {
+            QuickEntryScreen(
+                onBack = { navController.popBackStack() }
+            )
+        }
         composable(Screen.More.route) {
             MoreScreen(
                 onNavigate = { route -> navController.navigate(route) }
