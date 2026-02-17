@@ -36,8 +36,10 @@ jobs:
           echo "sdk.dir=$ANDROID_HOME" > local.properties
           echo "GROQ_API_KEY=${{ secrets.GROQ_API_KEY }}" >> local.properties
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
+      - name: Generate Gradle Wrapper JAR
+        run: |
+          gradle wrapper --gradle-version 8.11.1
+          chmod +x gradlew
 
       - name: Run Lint
         run: ./gradlew lintDebug --no-daemon
@@ -87,11 +89,10 @@ jobs:
 
       - name: Check APK Size
         run: |
-          APK_SIZE=$(stat -f%z app-debug.apk 2>/dev/null || stat -c%s app-debug.apk)
+          APK_SIZE=$(stat -c%s app-debug.apk 2>/dev/null || stat -f%z app-debug.apk)
           APK_SIZE_MB=$(echo "scale=2; $APK_SIZE / 1048576" | bc)
           echo "## 📦 APK Size: ${APK_SIZE_MB} MB" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          # Warn if APK > 50MB
           if (( $(echo "$APK_SIZE_MB > 50" | bc -l) )); then
             echo "⚠️ APK size exceeds 50MB!" >> $GITHUB_STEP_SUMMARY
           else
