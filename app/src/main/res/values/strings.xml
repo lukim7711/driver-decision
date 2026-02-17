@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Driver Finance</string>
+    <string name="accessibility_service_description">Driver Finance membutuhkan izin ini untuk otomatis membaca data order dan riwayat pesanan dari Shopee Driver. Data hanya disimpan di HP kamu dan tidak dikirim ke mana pun.</string>
 </resources>
