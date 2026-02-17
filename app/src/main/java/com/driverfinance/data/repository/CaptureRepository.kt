@@ -42,7 +42,7 @@ class CaptureRepository @Inject constructor(
 
     suspend fun updateTrip(trip: TripEntity) = tripDao.update(trip)
 
-    fun getTodayTrips(date: String): Flow<List<TripEntity>> = tripDao.getTodayTrips(date)
+    fun getTodayTrips(date: String): Flow<List<TripEntity>> = tripDao.getByDate(date)
 
     suspend fun getActiveTripWithinMinutes(date: String, cutoffTime: String): TripEntity? =
         tripDao.getActiveTripWithinMinutes(date, cutoffTime)
@@ -74,7 +74,7 @@ class CaptureRepository @Inject constructor(
     ): HistoryTripEntity? = historyTripDao.findDuplicate(date, time, serviceType, totalEarning)
 
     suspend fun getHistoryTripsWithoutLink(date: String): List<HistoryTripEntity> =
-        historyTripDao.getWithoutLink(date)
+        historyTripDao.getUnlinkedByDate(date)
 
     // --- History Details (F002) ---
 

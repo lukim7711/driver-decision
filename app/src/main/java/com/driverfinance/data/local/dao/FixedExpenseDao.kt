@@ -31,4 +31,7 @@ interface FixedExpenseDao {
 
     @Query("SELECT SUM(amount) FROM fixed_expenses WHERE is_active = 1")
     fun observeTotalMonthlyFixedExpenses(): Flow<Int?>
+
+    @Query("SELECT COUNT(*) FROM fixed_expenses WHERE is_active = 1")
+    suspend fun getCount(): Int
 }

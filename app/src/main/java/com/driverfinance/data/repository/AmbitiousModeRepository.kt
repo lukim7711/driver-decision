@@ -15,19 +15,19 @@ class AmbitiousModeRepository @Inject constructor(
     private val debtRepository: DebtRepository
 ) {
 
-    fun getAmbitiousMode(): Flow<AmbitiousModeEntity?> = dao.get()
+    fun getAmbitiousMode(): Flow<AmbitiousModeEntity?> = dao.observe()
 
-    suspend fun getAmbitiousModeSync(): AmbitiousModeEntity? = dao.getSync()
+    suspend fun getAmbitiousModeSync(): AmbitiousModeEntity? = dao.get()
 
     suspend fun activate(targetMonths: Int): ActivateResult {
         val activeDebtCount = debtRepository.getActiveDebtCount()
         if (activeDebtCount == 0) return ActivateResult.NoActiveDebts
 
         val now = OffsetDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
-        val existing = dao.getSync()
+        val existing = dao.get()
 
         if (existing != null) {
-            dao.update(
+            dao.upsert(
                 existing.copy(
                     isActive = 1,
                     targetMonths = targetMonths,
@@ -37,7 +37,7 @@ class AmbitiousModeRepository @Inject constructor(
                 )
             )
         } else {
-            dao.insert(
+            dao.upsert(
                 AmbitiousModeEntity(
                     id = UUID.randomUUID().toString(),
                     isActive = 1,
@@ -52,9 +52,9 @@ class AmbitiousModeRepository @Inject constructor(
     }
 
     suspend fun deactivateManual() {
-        val existing = dao.getSync() ?: return
+        val existing = dao.get() ?: return
         val now = OffsetDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
-        dao.update(
+        dao.upsert(
             existing.copy(
                 isActive = 0,
                 deactivatedReason = "MANUAL",
@@ -68,13 +68,13 @@ class AmbitiousModeRepository @Inject constructor(
      * Returns true if ambitious mode was deactivated.
      */
     suspend fun checkAndDeactivateAmbitiousMode(): Boolean {
-        val existing = dao.getSync() ?: return false
+        val existing = dao.get() ?: return false
         if (existing.isActive != 1) return false
 
         val activeDebtCount = debtRepository.getActiveDebtCount()
         if (activeDebtCount == 0) {
             val now = OffsetDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
-            dao.update(
+            dao.upsert(
                 existing.copy(
                     isActive = 0,
                     deactivatedReason = "AUTO_ALL_PAID_OFF",

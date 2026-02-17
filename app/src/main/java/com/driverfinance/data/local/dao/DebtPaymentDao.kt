@@ -24,4 +24,10 @@ interface DebtPaymentDao {
 
     @Query("SELECT SUM(amount) FROM debt_payments WHERE payment_date = :date")
     suspend fun getTotalPaidByDate(date: String): Int?
+
+    @Query("SELECT MAX(payment_date) FROM debt_payments WHERE debt_id = :debtId AND payment_type = :type")
+    suspend fun getLastPaymentDateByType(debtId: String, type: String): String?
+
+    @Query("SELECT SUM(amount) FROM debt_payments WHERE payment_date LIKE :yearMonth || '%' AND payment_type != 'EXPENSE'")
+    suspend fun getSumNonExpenseByMonth(yearMonth: String): Int?
 }

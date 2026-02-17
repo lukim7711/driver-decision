@@ -24,7 +24,7 @@ class ExtractionRepository @Inject constructor(
     suspend fun updateMatchedOrder(entity: MatchedOrderEntity) = matchedOrderDao.update(entity)
 
     suspend fun getMatchedOrdersByStatus(status: String): List<MatchedOrderEntity> =
-        matchedOrderDao.getByStatus(status)
+        matchedOrderDao.getByStatusSync(status)
 
     suspend fun getMatchedOrderByCapturedOrderId(id: String): MatchedOrderEntity? =
         matchedOrderDao.getByCapturedOrderId(id)

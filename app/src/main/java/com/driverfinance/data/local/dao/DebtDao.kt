@@ -23,8 +23,17 @@ interface DebtDao {
     @Query("SELECT * FROM debts WHERE status = 'ACTIVE' ORDER BY due_date_day ASC")
     fun getActiveDebts(): Flow<List<DebtEntity>>
 
+    @Query("SELECT * FROM debts WHERE status = 'ACTIVE' ORDER BY due_date_day ASC")
+    suspend fun getActiveDebtsSync(): List<DebtEntity>
+
     @Query("SELECT * FROM debts WHERE status = :status ORDER BY created_at DESC")
     fun getByStatus(status: String): Flow<List<DebtEntity>>
+
+    @Query("SELECT COUNT(*) FROM debts WHERE status = :status")
+    suspend fun getCountByStatus(status: String): Int
+
+    @Query("SELECT SUM(remaining_amount) FROM debts WHERE status = :status")
+    suspend fun getTotalRemaining(status: String): Int?
 
     @Query("UPDATE debts SET status = 'DELETED', updated_at = :updatedAt WHERE id = :id")
     suspend fun softDelete(id: String, updatedAt: String)

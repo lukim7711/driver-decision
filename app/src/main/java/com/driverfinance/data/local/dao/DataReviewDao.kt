@@ -23,6 +23,12 @@ interface DataReviewDao {
     @Query("SELECT * FROM data_reviews WHERE review_status = :status ORDER BY created_at DESC")
     fun getByStatus(status: String): Flow<List<DataReviewEntity>>
 
+    @Query("SELECT * FROM data_reviews WHERE review_status = 'PENDING' ORDER BY created_at DESC")
+    fun getPending(): Flow<List<DataReviewEntity>>
+
+    @Query("SELECT COUNT(*) FROM data_reviews WHERE review_status = 'PENDING' AND created_at LIKE :date || '%'")
+    suspend fun getTodayPendingCount(date: String): Int
+
     @Query("SELECT COUNT(*) FROM data_reviews WHERE review_status = 'PENDING'")
     fun getPendingCount(): Flow<Int>
 }

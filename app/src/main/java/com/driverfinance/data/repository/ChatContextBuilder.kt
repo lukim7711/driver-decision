@@ -64,8 +64,8 @@ class ChatContextBuilder @Inject constructor(
                 if (debt.dueDateDay != null) {
                     sb.append(", jatuh tempo tgl ${debt.dueDateDay}")
                 }
-                sb.append(", tipe ${debt.type}")
-                if (debt.hasPenalty == 1) {
+                sb.append(", tipe ${debt.debtType}")
+                if (debt.penaltyType != "NONE") {
                     sb.append(", ADA DENDA")
                 }
                 sb.appendLine()

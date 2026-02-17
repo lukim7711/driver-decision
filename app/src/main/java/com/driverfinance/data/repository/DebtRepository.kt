@@ -18,6 +18,8 @@ class DebtRepository @Inject constructor(
 
     fun getActiveDebts(): Flow<List<DebtEntity>> = debtDao.getByStatus("ACTIVE")
 
+    suspend fun getActiveDebtsSync(): List<DebtEntity> = debtDao.getActiveDebtsSync()
+
     fun getPaidOffDebts(): Flow<List<DebtEntity>> = debtDao.getByStatus("PAID_OFF")
 
     suspend fun getDebtById(id: String): DebtEntity? = debtDao.getById(id)
@@ -30,7 +32,7 @@ class DebtRepository @Inject constructor(
 
     suspend fun getTotalRemainingAmount(): Int = debtDao.getTotalRemaining("ACTIVE") ?: 0
 
-    suspend fun getTotalMonthlyInstallment(): Int = debtDao.getTotalMonthlyInstallment("ACTIVE") ?: 0
+    suspend fun getTotalMonthlyInstallment(): Int = debtDao.getTotalMonthlyInstallment() ?: 0
 
     // --- Payments ---
 

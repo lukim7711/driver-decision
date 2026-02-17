@@ -1,8 +1,8 @@
 package com.driverfinance.data.repository
 
 import com.driverfinance.data.remote.GroqApiService
-import com.driverfinance.data.remote.dto.ChatCompletionRequest
-import com.driverfinance.data.remote.dto.ChatMessage
+import com.driverfinance.data.remote.model.GroqMessage
+import com.driverfinance.data.remote.model.GroqRequest
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -17,24 +17,24 @@ class ChatRepository @Inject constructor(
 
     suspend fun sendChat(
         systemPrompt: String,
-        conversationHistory: List<ChatMessage>,
+        conversationHistory: List<GroqMessage>,
         userMessage: String
     ): ChatResult {
         return try {
             val messages = buildList {
-                add(ChatMessage(role = "system", content = systemPrompt))
+                add(GroqMessage(role = "system", content = systemPrompt))
                 addAll(conversationHistory)
-                add(ChatMessage(role = "user", content = userMessage))
+                add(GroqMessage(role = "user", content = userMessage))
             }
 
-            val request = ChatCompletionRequest(
+            val request = GroqRequest(
                 model = "llama-3.3-70b-versatile",
                 messages = messages,
                 maxTokens = 300,
                 temperature = 0.7
             )
 
-            val response = groqApiService.chatCompletion(request)
+            val response = groqApiService.chatCompletions(request)
             val aiMessage = response.choices.firstOrNull()?.message?.content
                 ?: "Maaf, saya tidak bisa memproses pertanyaan kamu saat ini."
 

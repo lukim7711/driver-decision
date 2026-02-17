@@ -24,5 +24,8 @@ interface ParsingPatternDao {
     suspend fun getActiveByScreenType(screenType: String): List<ParsingPatternEntity>
 
     @Query("SELECT * FROM parsing_patterns WHERE is_active = 1 ORDER BY accuracy DESC")
+    suspend fun getActive(): List<ParsingPatternEntity>
+
+    @Query("SELECT * FROM parsing_patterns WHERE is_active = 1 ORDER BY accuracy DESC")
     fun getActivePatterns(): Flow<List<ParsingPatternEntity>>
 }
