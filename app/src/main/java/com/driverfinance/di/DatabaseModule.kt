@@ -92,9 +92,11 @@ object DatabaseModule {
     @Provides fun provideAiCorrectionLogDao(db: AppDatabase): AiCorrectionLogDao = db.aiCorrectionLogDao()
     @Provides fun provideQuickEntryCategoryDao(db: AppDatabase): QuickEntryCategoryDao = db.quickEntryCategoryDao()
     @Provides fun provideQuickEntryDao(db: AppDatabase): QuickEntryDao = db.quickEntryDao()
+    @Provides fun provideQuickEntryPresetDao(db: AppDatabase): QuickEntryPresetDao = db.quickEntryPresetDao()
     @Provides fun provideDebtDao(db: AppDatabase): DebtDao = db.debtDao()
     @Provides fun provideDebtPaymentDao(db: AppDatabase): DebtPaymentDao = db.debtPaymentDao()
     @Provides fun provideFixedExpenseDao(db: AppDatabase): FixedExpenseDao = db.fixedExpenseDao()
     @Provides fun provideWorkScheduleDao(db: AppDatabase): WorkScheduleDao = db.workScheduleDao()
     @Provides fun provideAmbitiousModeDao(db: AppDatabase): AmbitiousModeDao = db.ambitiousModeDao()
+    @Provides fun provideDailyTargetCacheDao(db: AppDatabase): DailyTargetCacheDao = db.dailyTargetCacheDao()
 }
