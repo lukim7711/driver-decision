@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <group
+        android:scaleX="0.4"
+        android:scaleY="0.4"
+        android:translateX="32.4"
+        android:translateY="32.4">
+        <!-- Simple dollar sign icon -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M54,18c-19.88,0 -36,16.12 -36,36s16.12,36 36,36 36,-16.12 36,-36 -16.12,-36 -36,-36zM57.6,72.98v5.02h-7.2v-4.86c-4.86,-0.58 -9.72,-2.52 -12.6,-5.04l3.96,-6.48c3.24,2.52 6.84,4.14 10.44,4.14 3.24,0 5.4,-1.26 5.4,-3.6 0,-2.52 -2.52,-3.78 -7.56,-5.4 -7.56,-2.52 -13.32,-5.76 -13.32,-13.14 0,-6.48 4.5,-11.52 12.24,-12.96v-4.86h7.2v4.5c4.14,0.54 7.56,1.98 10.44,3.96l-3.6,6.66c-2.88,-1.8 -5.76,-3.06 -8.82,-3.06 -3.24,0 -4.86,1.44 -4.86,3.42 0,2.7 2.7,3.78 8.1,5.58 7.56,2.52 12.78,5.94 12.78,13.14 0,6.84 -4.86,11.88 -12.6,13.14z" />
+    </group>
+</vector>
