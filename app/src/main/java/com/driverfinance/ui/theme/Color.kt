@@ -2,54 +2,46 @@ package com.driverfinance.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// Primary - Green (money/financial theme)
-val Green10 = Color(0xFF002204)
-val Green20 = Color(0xFF00390A)
-val Green30 = Color(0xFF005313)
-val Green40 = Color(0xFF006E1C)
-val Green80 = Color(0xFF78DC77)
-val Green90 = Color(0xFF93F98E)
+// Primary — Green (Finance/Money)
+val Green50 = Color(0xFFE8F5E9)
+val Green100 = Color(0xFFC8E6C9)
+val Green200 = Color(0xFFA5D6A7)
+val Green400 = Color(0xFF66BB6A)
+val Green500 = Color(0xFF4CAF50)
+val Green600 = Color(0xFF43A047)
+val Green700 = Color(0xFF388E3C)
+val Green800 = Color(0xFF2E7D32)
+val Green900 = Color(0xFF1B5E20)
 
-// Secondary - Teal
-val Teal10 = Color(0xFF002021)
-val Teal20 = Color(0xFF003739)
-val Teal30 = Color(0xFF004F52)
-val Teal40 = Color(0xFF00696C)
-val Teal80 = Color(0xFF4CDADF)
-val Teal90 = Color(0xFF6FF7FC)
+// Accent — Blue (AI/Info)
+val Blue50 = Color(0xFFE3F2FD)
+val Blue500 = Color(0xFF2196F3)
+val Blue700 = Color(0xFF1976D2)
 
-// Tertiary - Orange (accent for Shopee-like feel)
-val Orange10 = Color(0xFF2B1700)
-val Orange20 = Color(0xFF462A00)
-val Orange30 = Color(0xFF633F00)
-val Orange40 = Color(0xFF825500)
-val Orange80 = Color(0xFFFFB86B)
-val Orange90 = Color(0xFFFFDDB8)
+// Error — Red
+val Red50 = Color(0xFFFFEBEE)
+val Red500 = Color(0xFFF44336)
+val Red700 = Color(0xFFD32F2F)
 
-// Error
-val Red10 = Color(0xFF410002)
-val Red20 = Color(0xFF690005)
-val Red30 = Color(0xFF93000A)
-val Red40 = Color(0xFFBA1A1A)
-val Red80 = Color(0xFFFFB4AB)
-val Red90 = Color(0xFFFFDAD6)
+// Warning — Amber
+val Amber50 = Color(0xFFFFF8E1)
+val Amber500 = Color(0xFFFFC107)
+val Amber700 = Color(0xFFFFA000)
 
 // Neutral
-val Neutral10 = Color(0xFF1A1C19)
-val Neutral20 = Color(0xFF2F312D)
-val Neutral90 = Color(0xFFE2E3DD)
-val Neutral95 = Color(0xFFF0F1EB)
-val Neutral99 = Color(0xFFFCFDF6)
+val Gray50 = Color(0xFFFAFAFA)
+val Gray100 = Color(0xFFF5F5F5)
+val Gray200 = Color(0xFFEEEEEE)
+val Gray300 = Color(0xFFE0E0E0)
+val Gray400 = Color(0xFFBDBDBD)
+val Gray500 = Color(0xFF9E9E9E)
+val Gray600 = Color(0xFF757575)
+val Gray700 = Color(0xFF616161)
+val Gray800 = Color(0xFF424242)
+val Gray900 = Color(0xFF212121)
 
-// Neutral Variant
-val NeutralVariant30 = Color(0xFF414941)
-val NeutralVariant50 = Color(0xFF727970)
-val NeutralVariant60 = Color(0xFF8C9389)
-val NeutralVariant80 = Color(0xFFC1C9BE)
-val NeutralVariant90 = Color(0xFFDDE5D9)
-
-// Semantic Colors (cross-feature, ref: ARCHITECTURE.md Section 6.4)
-val StatusGreen = Color(0xFF2E7D32)
-val StatusYellow = Color(0xFFF9A825)
-val StatusRed = Color(0xFFC62828)
-val StatusGray = Color(0xFF757575)
+// Semantic — dashboard, debt cards, target progress
+val ProfitGreen = Green700
+val LossRed = Red700
+val ProgressYellow = Amber700
+val TargetMetGreen = Green600
