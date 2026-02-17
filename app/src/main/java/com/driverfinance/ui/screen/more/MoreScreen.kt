@@ -16,24 +16,29 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.driverfinance.ui.navigation.Screen
 import com.driverfinance.ui.theme.Spacing
 
-data class MoreMenuItem(
+private data class MoreMenuItem(
     val emoji: String,
     val title: String,
-    val subtitle: String
+    val subtitle: String,
+    val route: String?
 )
 
 private val menuItems = listOf(
-    MoreMenuItem("\uD83D\uDCB3", "Manajemen Hutang", "Kelola hutang & cicilan"),
-    MoreMenuItem("\uD83D\uDCC5", "Kewajiban & Jadwal", "Biaya tetap & jadwal kerja"),
-    MoreMenuItem("\uD83C\uDFAF", "Detail Target", "Lihat perhitungan target harian"),
-    MoreMenuItem("\uD83D\uDCCB", "Data Perlu Dicek", "Review data hasil capture"),
-    MoreMenuItem("\uD83D\uDCF7", "Capture Manager", "Pengaturan auto capture")
+    MoreMenuItem("\uD83D\uDCB3", "Manajemen Hutang", "Kelola hutang & cicilan", null),
+    MoreMenuItem("\uD83D\uDCC5", "Kewajiban & Jadwal", "Biaya tetap & jadwal kerja", null),
+    MoreMenuItem("\uD83C\uDFAF", "Detail Target", "Lihat perhitungan target harian", null),
+    MoreMenuItem("\uD83D\uDCCB", "Data Perlu Dicek", "Review data hasil capture", null),
+    MoreMenuItem("\uD83D\uDCF7", "Capture Manager", "Pengaturan auto capture", Screen.CaptureManager.route)
 )
 
 @Composable
-fun MoreScreen(modifier: Modifier = Modifier) {
+fun MoreScreen(
+    onNavigate: (String) -> Unit = {},
+    modifier: Modifier = Modifier
+) {
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -64,7 +69,7 @@ fun MoreScreen(modifier: Modifier = Modifier) {
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clickable { /* TODO: navigate to sub-screen */ }
+                    .clickable { item.route?.let { onNavigate(it) } }
             )
             HorizontalDivider()
         }
