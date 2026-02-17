@@ -26,6 +26,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
@@ -38,7 +39,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -112,7 +112,6 @@ private fun ActiveChatContent(
     val listState = rememberLazyListState()
     var inputText by remember { mutableStateOf("") }
 
-    // Auto-scroll to bottom on new messages
     LaunchedEffect(bubbles.size) {
         if (bubbles.isNotEmpty()) {
             listState.animateScrollToItem(bubbles.size - 1)
@@ -120,7 +119,6 @@ private fun ActiveChatContent(
     }
 
     Column(modifier = modifier.fillMaxSize()) {
-        // Chat messages
         LazyColumn(
             state = listState,
             modifier = Modifier.weight(1f).padding(horizontal = Spacing.md),
@@ -136,48 +134,52 @@ private fun ActiveChatContent(
             item { Spacer(modifier = Modifier.height(Spacing.sm)) }
         }
 
-        // Input bar
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(Spacing.sm),
-            verticalAlignment = Alignment.CenterVertically
+        Surface(
+            tonalElevation = 2.dp,
+            modifier = Modifier.fillMaxWidth()
         ) {
-            OutlinedTextField(
-                value = inputText,
-                onValueChange = { inputText = it },
-                modifier = Modifier.weight(1f),
-                placeholder = { Text("Ketik pertanyaan...") },
-                enabled = !isSending,
-                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Send),
-                keyboardActions = KeyboardActions(
-                    onSend = {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = Spacing.sm, vertical = Spacing.sm),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                OutlinedTextField(
+                    value = inputText,
+                    onValueChange = { inputText = it },
+                    modifier = Modifier.weight(1f),
+                    placeholder = { Text("Ketik pertanyaan...") },
+                    enabled = !isSending,
+                    keyboardOptions = KeyboardOptions(imeAction = ImeAction.Send),
+                    keyboardActions = KeyboardActions(
+                        onSend = {
+                            if (inputText.isNotBlank() && !isSending) {
+                                onSend(inputText)
+                                inputText = ""
+                            }
+                        }
+                    ),
+                    singleLine = false,
+                    maxLines = 4,
+                    shape = RoundedCornerShape(24.dp)
+                )
+                IconButton(
+                    onClick = {
                         if (inputText.isNotBlank() && !isSending) {
                             onSend(inputText)
                             inputText = ""
                         }
-                    }
-                ),
-                singleLine = false,
-                maxLines = 4,
-                shape = RoundedCornerShape(24.dp)
-            )
-            IconButton(
-                onClick = {
-                    if (inputText.isNotBlank() && !isSending) {
-                        onSend(inputText)
-                        inputText = ""
-                    }
-                },
-                enabled = inputText.isNotBlank() && !isSending
-            ) {
-                Icon(
-                    Icons.AutoMirrored.Filled.Send,
-                    contentDescription = "Kirim",
-                    tint = if (inputText.isNotBlank() && !isSending)
-                        MaterialTheme.colorScheme.primary
-                    else MaterialTheme.colorScheme.onSurfaceVariant
-                )
+                    },
+                    enabled = inputText.isNotBlank() && !isSending
+                ) {
+                    Icon(
+                        Icons.AutoMirrored.Filled.Send,
+                        contentDescription = "Kirim",
+                        tint = if (inputText.isNotBlank() && !isSending)
+                            MaterialTheme.colorScheme.primary
+                        else MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
             }
         }
     }
@@ -211,15 +213,15 @@ private fun ChatBubbleItem(
     ) {
         Column(
             modifier = Modifier
-                .widthIn(max = 300.dp)
+                .widthIn(max = 320.dp)
                 .clip(RoundedCornerShape(
-                    topStart = 16.dp,
-                    topEnd = 16.dp,
-                    bottomStart = if (bubble.isUser) 16.dp else 4.dp,
-                    bottomEnd = if (bubble.isUser) 4.dp else 16.dp
+                    topStart = 20.dp,
+                    topEnd = 20.dp,
+                    bottomStart = if (bubble.isUser) 20.dp else 4.dp,
+                    bottomEnd = if (bubble.isUser) 4.dp else 20.dp
                 ))
                 .background(bgColor)
-                .padding(Spacing.md)
+                .padding(horizontal = Spacing.md, vertical = 12.dp)
         ) {
             if (!bubble.isUser && !bubble.isLoading && !bubble.isError) {
                 Text(

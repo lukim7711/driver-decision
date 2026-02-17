@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -5,6 +7,16 @@ plugins {
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.ksp)
 }
+
+// Load Groq API key: local.properties > gradle.properties > env var > empty
+val localPropsFile = rootProject.file("local.properties")
+val localProps = Properties().apply {
+    if (localPropsFile.exists()) load(localPropsFile.inputStream())
+}
+val groqApiKey: String = localProps.getProperty("GROQ_API_KEY")
+    ?: project.findProperty("GROQ_API_KEY") as? String
+    ?: System.getenv("GROQ_API_KEY")
+    ?: ""
 
 android {
     namespace = "com.driverfinance"
@@ -19,10 +31,6 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        // Groq API key: reads from local.properties first, then env var fallback
-        val groqApiKey = project.findProperty("GROQ_API_KEY") as? String
-            ?: System.getenv("GROQ_API_KEY")
-            ?: ""
         buildConfigField("String", "GROQ_API_KEY", "\"$groqApiKey\"")
     }
 
