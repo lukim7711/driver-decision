@@ -5,7 +5,7 @@
 ## Sesi Terakhir
 - **Tanggal**: 2026-02-18
 - **Fase**: MVP Build
-- **Status**: F003 AI Ekstraksi Data selesai
+- **Status**: F004 Input Cepat selesai
 
 ---
 
@@ -28,7 +28,7 @@
 | F001 | Auto Capture Order Masuk | ✅ | #17 |
 | F002 | Capture Riwayat Rincian Pesanan | ✅ | #18 |
 | F003 | AI Ekstraksi Data dari Capture | ✅ | #19 |
-| F004 | Input Cepat | ⬜ | — |
+| F004 | Input Cepat | ✅ | #20 |
 | F005 | Dashboard Harian | ⬜ | — |
 | F006 | Manajemen Hutang | ⬜ | — |
 | F007 | Target Harian Otomatis | ⬜ | — |
