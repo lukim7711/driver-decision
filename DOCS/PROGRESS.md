@@ -5,7 +5,7 @@
 ## Sesi Terakhir
 - **Tanggal**: 2026-02-18
 - **Fase**: MVP Build
-- **Status**: F006 Manajemen Hutang selesai
+- **Status**: F009 Kewajiban & Jadwal selesai
 
 ---
 
@@ -33,7 +33,7 @@
 | F006 | Manajemen Hutang | ✅ | #22 |
 | F007 | Target Harian Otomatis | ⬜ | — |
 | F008 | AI Chat Tanya Kapan Saja | ⬜ | — |
-| F009 | Kewajiban & Jadwal | ⬜ | — |
+| F009 | Kewajiban & Jadwal | ✅ | #23 |
 
 ### Post-MVP (SHOULD)
 
@@ -60,3 +60,8 @@
 | ID | Nama | Status | PR |
 |----|------|--------|----|
 | (kosong — akan diisi saat build) | | | |
+
+---
+
+## Build Order Notes
+- F009 dibangun sebelum F007 karena F007 membaca tabel milik F009 (fixed_expenses, work_schedules, ambitious_mode)

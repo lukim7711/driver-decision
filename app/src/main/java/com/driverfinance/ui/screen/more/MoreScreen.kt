@@ -47,6 +47,16 @@ fun MoreScreen(
                 onClick = { onNavigate(Screen.DebtList.route) }
             )
             MoreMenuItem(
+                icon = "\uD83D\uDCCB",
+                label = "Biaya Tetap Bulanan",
+                onClick = { onNavigate(Screen.FixedExpense.route) }
+            )
+            MoreMenuItem(
+                icon = "\uD83D\uDCC5",
+                label = "Jadwal Kerja",
+                onClick = { onNavigate(Screen.WorkSchedule.route) }
+            )
+            MoreMenuItem(
                 icon = "\uD83D\uDCF8",
                 label = "Capture Manager",
                 onClick = { onNavigate(Screen.CaptureManager.route) }
