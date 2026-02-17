@@ -65,16 +65,15 @@ class GetTargetDetailUseCase @Inject constructor(
             val urgentDeadlines = debtObligations.filter { it.isUrgent }
             val overdueDeadlines = debtObligations.filter { it.isOverdue }
 
-            // Today's profit
-            val todayProfit = cache.profitAccumulated -
-                (debtRepository.getMonthlyProfitAccumulated(today.minusDays(1)))
+            // Today's profit from cache (profitAccumulated is month-to-date)
+            val todayProfit = cache.profitAccumulated.coerceAtLeast(0)
 
             TargetDetailData(
                 cache = cache,
-                todayProfit = todayProfit.coerceAtLeast(0),
-                todayRemaining = (cache.targetAmount - todayProfit.coerceAtLeast(0)).coerceAtLeast(0),
+                todayProfit = todayProfit,
+                todayRemaining = (cache.targetAmount - todayProfit).coerceAtLeast(0),
                 todayProgress = if (cache.targetAmount > 0) {
-                    (todayProfit.coerceAtLeast(0) * 100) / cache.targetAmount
+                    (todayProfit * 100) / cache.targetAmount
                 } else 100,
                 debtObligations = debtObligations,
                 fixedExpenseObligations = fixedExpenseObligations,

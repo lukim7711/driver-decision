@@ -34,6 +34,7 @@ import java.util.Locale
 
 @Composable
 fun DashboardScreen(
+    onTargetDetailClick: () -> Unit = {},
     modifier: Modifier = Modifier,
     viewModel: DashboardViewModel = hiltViewModel()
 ) {
@@ -70,7 +71,11 @@ fun DashboardScreen(
             }
         }
         is DashboardUiState.Success -> {
-            DashboardContent(state = state, modifier = modifier)
+            DashboardContent(
+                state = state,
+                onTargetDetailClick = onTargetDetailClick,
+                modifier = modifier
+            )
         }
     }
 }
@@ -78,6 +83,7 @@ fun DashboardScreen(
 @Composable
 private fun DashboardContent(
     state: DashboardUiState.Success,
+    onTargetDetailClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val data = state.data
@@ -111,7 +117,8 @@ private fun DashboardContent(
             profit = data.profit,
             targetProgress = state.targetProgress,
             targetRemaining = state.targetRemaining,
-            isTargetAchieved = state.isTargetAchieved
+            isTargetAchieved = state.isTargetAchieved,
+            onDetailClick = onTargetDetailClick
         )
 
         // Profit Card
@@ -165,9 +172,13 @@ private fun HeroCard(
     targetProgress: Float,
     targetRemaining: Int,
     isTargetAchieved: Boolean,
+    onDetailClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Card(modifier = modifier.fillMaxWidth()) {
+    Card(
+        onClick = onDetailClick,
+        modifier = modifier.fillMaxWidth()
+    ) {
         Column(modifier = Modifier.padding(Spacing.lg)) {
             if (dailyTarget != null) {
                 if (isTargetAchieved) {
