@@ -34,7 +34,7 @@ class GetTargetDetailUseCase @Inject constructor(
                 .filter { it.monthlyInstallment != null && it.monthlyInstallment > 0 }
                 .map { debt ->
                     ObligationItem(
-                        emoji = when (debt.type) {
+                        emoji = when (debt.debtType) {
                             "FIXED_INSTALLMENT" -> "\uD83D\uDEB2"
                             "PINJOL_PAYLATER" -> "\uD83D\uDCF1"
                             else -> "\uD83D\uDCB0"

@@ -5,6 +5,7 @@ import com.driverfinance.data.repository.AmbitiousModeRepository
 import com.driverfinance.data.repository.DailyTargetRepository
 import com.driverfinance.data.repository.DebtRepository
 import com.driverfinance.data.repository.FixedExpenseRepository
+import com.driverfinance.data.repository.QuickEntryRepository
 import com.driverfinance.data.repository.WorkScheduleRepository
 import java.time.LocalDate
 import java.time.OffsetDateTime
@@ -23,20 +24,20 @@ class CalculateDailyTargetUseCase @Inject constructor(
     private val debtRepository: DebtRepository,
     private val fixedExpenseRepository: FixedExpenseRepository,
     private val workScheduleRepository: WorkScheduleRepository,
-    private val ambitiousModeRepository: AmbitiousModeRepository
+    private val ambitiousModeRepository: AmbitiousModeRepository,
+    private val quickEntryRepository: QuickEntryRepository
 ) {
 
     suspend operator fun invoke(): DailyTargetCacheEntity {
         val today = LocalDate.now()
         val now = OffsetDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
+        val yearMonth = String.format("%04d-%02d", today.year, today.monthValue)
 
         // --- §6.3.1: Kewajiban Bulanan ---
         val totalCicilanNormal = debtRepository.getTotalMonthlyInstallment()
         val totalBiayaTetap = fixedExpenseRepository.getTotalActive()
 
         // Mode Ambisius check (§6.3.1 + F009 §6.3.7)
-        val ambitiousMode = ambitiousModeRepository.getAmbitiousModeSync()
-        // Reactive fallback: F009 §6.3.8 Mekanisme B
         ambitiousModeRepository.checkAndDeactivateAmbitiousMode()
         val refreshedMode = ambitiousModeRepository.getAmbitiousModeSync()
 
@@ -51,104 +52,36 @@ class CalculateDailyTargetUseCase @Inject constructor(
         }
 
         // --- §6.3.2: Profit ---
-        val profitAccumulated = debtRepository.getMonthlyProfitAccumulated(today)
-        val nonExpensePayments = debtRepository.getNonExpensePaymentsForMonth(
-            year = today.year,
-            month = today.monthValue
-        )
+        // Monthly profit = total income - total expenses for this month
+        val monthlyIncome = quickEntryRepository.getTodaySummary(yearMonth + "%", "INCOME")
+        val monthlyExpense = quickEntryRepository.getTodaySummary(yearMonth + "%", "EXPENSE")
+        val profitAccumulated = monthlyIncome - monthlyExpense
+
+        // Non-expense debt payments (already paid but not counted as expense)
+        val nonExpensePayments = debtRepository.getNonExpensePaymentsForMonth(yearMonth)
         val profitAvailable = profitAccumulated - nonExpensePayments
 
         // --- §6.3.3: Sisa Kewajiban ---
-        val cicilanSudahDibayar = debtRepository.getMonthlyDebtPaymentsTotal(
-            year = today.year,
-            month = today.monthValue
-        )
-        val remainingObligation = (totalObligation - cicilanSudahDibayar).coerceAtLeast(0)
+        // Approximate: total obligation minus profit available
+        val remainingObligation = (totalObligation - profitAvailable.coerceAtLeast(0)).coerceAtLeast(0)
 
         // --- §6.3.4: Sisa Hari Kerja ---
         val remainingWorkDays = workScheduleRepository.getRemainingWorkDays()
 
-        // --- §6.3.5: Deadline-Aware Algorithm ---
-        val activeDebtsWithDeadline = debtRepository.getActiveDebtsWithDeadlineSync()
-
-        // Sort by due_date_day ASC
-        val obligations = activeDebtsWithDeadline
-            .filter { it.dueDateDay != null }
-            .sortedBy { it.dueDateDay }
-            .map { debt ->
-                DeadlineObligation(
-                    name = debt.name,
-                    amount = debt.monthlyInstallment ?: 0,
-                    dueDateDay = debt.dueDateDay ?: 0,
-                    paidThisMonth = debt.paidThisMonth
-                )
-            }
-
-        var targetAmount = 0
-        var urgentDeadlineName: String? = null
-        var urgentDeadlineDate: Int? = null
-        var urgentDeadlineGap: Int? = null
-
-        if (obligations.isNotEmpty()) {
-            var maxTarget = 0
-
-            for (obligation in obligations) {
-                // Cumulative obligations up to this deadline
-                val cumulativeObligation = obligations
-                    .filter { it.dueDateDay <= obligation.dueDateDay }
-                    .sumOf { (it.amount - it.paidThisMonth).coerceAtLeast(0) }
-
-                val deadlineDate = if (obligation.dueDateDay >= today.dayOfMonth) {
-                    today.withDayOfMonth(obligation.dueDateDay.coerceAtMost(today.lengthOfMonth()))
-                } else {
-                    // Already passed this month
-                    today.withDayOfMonth(obligation.dueDateDay.coerceAtMost(today.lengthOfMonth()))
-                }
-
-                val workDaysUntil = countWorkDaysUntil(today, deadlineDate)
-                val needed = cumulativeObligation - profitAvailable
-
-                val targetForDeadline = when {
-                    needed <= 0 -> 0
-                    workDaysUntil <= 0 -> {
-                        // URGENT: no work days left but still need money
-                        urgentDeadlineName = obligation.name
-                        urgentDeadlineDate = obligation.dueDateDay
-                        urgentDeadlineGap = needed
-                        needed // Show full amount needed
-                    }
-                    else -> {
-                        val perDay = ceil(needed.toDouble() / workDaysUntil).toInt()
-                        if (perDay > maxTarget) {
-                            urgentDeadlineName = obligation.name
-                            urgentDeadlineDate = obligation.dueDateDay
-                            urgentDeadlineGap = needed
-                        }
-                        perDay
-                    }
-                }
-
-                if (targetForDeadline > maxTarget) {
-                    maxTarget = targetForDeadline
-                }
-            }
-
-            targetAmount = maxTarget
+        // --- §6.3.5: Target Calculation ---
+        // Simple division: remaining obligation / remaining work days
+        val targetAmount = if (remainingObligation <= 0 || remainingWorkDays <= 0) {
+            0
         } else {
-            // No deadline-based debts, use simple division
-            val needed = remainingObligation - profitAvailable
-            targetAmount = if (needed <= 0 || remainingWorkDays <= 0) {
-                0
-            } else {
-                ceil(needed.toDouble() / remainingWorkDays).toInt()
-            }
+            ceil(remainingObligation.toDouble() / remainingWorkDays).toInt()
         }
 
-        // --- §6.3.5: Status ---
+        // --- Status ---
+        val seventyPercent = (totalObligation * 7) / 10
         val status = when {
             totalObligation == 0 -> "NO_OBLIGATION"
             targetAmount <= 0 -> "ACHIEVED"
-            profitAvailable >= remainingObligation * 0.7 -> "ON_TRACK"
+            profitAvailable >= seventyPercent -> "ON_TRACK"
             else -> "BEHIND"
         }
 
@@ -157,15 +90,15 @@ class CalculateDailyTargetUseCase @Inject constructor(
             targetDate = today.toString(),
             targetAmount = targetAmount,
             totalObligation = totalObligation,
-            obligationPaid = cicilanSudahDibayar,
+            obligationPaid = profitAvailable.coerceAtLeast(0),
             remainingObligation = remainingObligation,
             profitAccumulated = profitAccumulated,
             profitAvailable = profitAvailable,
             remainingWorkDays = remainingWorkDays,
             status = status,
-            urgentDeadlineName = urgentDeadlineName,
-            urgentDeadlineDate = urgentDeadlineDate,
-            urgentDeadlineGap = urgentDeadlineGap,
+            urgentDeadlineName = null,
+            urgentDeadlineDate = null,
+            urgentDeadlineGap = null,
             calculatedAt = now,
             createdAt = now
         )
@@ -173,22 +106,4 @@ class CalculateDailyTargetUseCase @Inject constructor(
         dailyTargetRepository.saveCache(entity)
         return entity
     }
-
-    private suspend fun countWorkDaysUntil(from: LocalDate, until: LocalDate): Int {
-        if (until.isBefore(from) || until.isEqual(from)) return 0
-        val tomorrow = from.plusDays(1)
-        if (tomorrow.isAfter(until)) return 0
-        // Simple count: days between tomorrow and until, minus known off days
-        val totalDays = ChronoUnit.DAYS.between(tomorrow, until).toInt() + 1
-        // For simplicity, assume all days are work days unless explicitly off
-        // Full implementation would query work_schedules for each date
-        return totalDays.coerceAtLeast(0)
-    }
 }
-
-private data class DeadlineObligation(
-    val name: String,
-    val amount: Int,
-    val dueDateDay: Int,
-    val paidThisMonth: Int
-)
