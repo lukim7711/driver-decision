@@ -1,6 +1,6 @@
 package com.driverfinance.domain.usecase.chat
 
-import com.driverfinance.data.remote.dto.ChatMessage
+import com.driverfinance.data.remote.model.GroqMessage
 import com.driverfinance.data.repository.ChatContextBuilder
 import com.driverfinance.data.repository.ChatRepository
 import com.driverfinance.data.repository.ChatResult
@@ -50,7 +50,7 @@ class SendChatMessageUseCase @Inject constructor(
 
     suspend operator fun invoke(
         userMessage: String,
-        conversationHistory: List<ChatMessage>
+        conversationHistory: List<GroqMessage>
     ): ChatMessageResult {
         // Build context from all feature data
         val driverContext = chatContextBuilder.buildContext()
