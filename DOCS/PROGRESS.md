@@ -5,7 +5,7 @@
 ## Sesi Terakhir
 - **Tanggal**: 2026-02-18
 - **Fase**: SETUP
-- **Status**: Navigation + Tab Bar selesai
+- **Status**: Semua SETUP selesai. Siap mulai MVP.
 
 ---
 
@@ -18,8 +18,8 @@
 | — | Project Setup | ✅ | #14 |
 | — | Database + Room Setup | ✅ | #14 |
 | — | Accessibility Service Setup | ✅ | #14 |
-| — | Groq API Integration | ⬜ | — |
-| — | Navigation + Tab Bar | ✅ | setup/navigation-tab-bar |
+| — | Groq API Integration | ✅ | #16 |
+| — | Navigation + Tab Bar | ✅ | #15 |
 
 ### MVP Features (MUST)
 
