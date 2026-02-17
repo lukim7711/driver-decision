@@ -4,16 +4,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import com.driverfinance.ui.components.AppTabBar
+import com.driverfinance.ui.navigation.AppNavigation
 import com.driverfinance.ui.theme.DriverFinanceTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,26 +23,32 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             DriverFinanceTheme {
-                Scaffold { innerPadding ->
-                    PlaceholderScreen(
+                val navController = rememberNavController()
+                val navBackStackEntry by navController.currentBackStackEntryAsState()
+                val currentRoute = navBackStackEntry?.destination?.route
+
+                Scaffold(
+                    bottomBar = {
+                        AppTabBar(
+                            currentRoute = currentRoute,
+                            onTabSelected = { screen ->
+                                navController.navigate(screen.route) {
+                                    popUpTo(navController.graph.startDestinationId) {
+                                        saveState = true
+                                    }
+                                    launchSingleTop = true
+                                    restoreState = true
+                                }
+                            }
+                        )
+                    }
+                ) { innerPadding ->
+                    AppNavigation(
+                        navController = navController,
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
             }
         }
-    }
-}
-
-@Composable
-private fun PlaceholderScreen(modifier: Modifier = Modifier) {
-    Box(
-        modifier = modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = "Driver Finance",
-            style = MaterialTheme.typography.headlineLarge,
-            color = MaterialTheme.colorScheme.primary
-        )
     }
 }
