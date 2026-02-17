@@ -20,7 +20,7 @@ class FixedExpenseRepository @Inject constructor(
 
     suspend fun update(expense: FixedExpenseEntity) = dao.update(expense)
 
-    suspend fun getTotalActive(): Int = dao.getTotalActive() ?: 0
+    suspend fun getTotalActive(): Int = dao.getTotalMonthlyFixedExpenses() ?: 0
 
     suspend fun hasAnyRecords(): Boolean = dao.getCount() > 0
 }

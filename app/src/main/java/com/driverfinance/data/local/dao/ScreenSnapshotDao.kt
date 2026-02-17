@@ -23,6 +23,9 @@ interface ScreenSnapshotDao {
     @Query("SELECT * FROM screen_snapshots WHERE screen_type = :type ORDER BY captured_at DESC")
     fun getByType(type: String): Flow<List<ScreenSnapshotEntity>>
 
+    @Query("SELECT COUNT(*) FROM screen_snapshots WHERE screen_type = :type")
+    suspend fun getByTypeCount(type: String): Int
+
     @Query("SELECT * FROM screen_snapshots WHERE is_processed = 0 ORDER BY captured_at ASC")
     suspend fun getUnprocessed(): List<ScreenSnapshotEntity>
 

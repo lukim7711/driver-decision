@@ -29,6 +29,12 @@ interface QuickEntryCategoryDao {
     @Query("SELECT * FROM quick_entry_categories WHERE is_active = 1 AND type = :type ORDER BY sort_order ASC")
     fun getActiveByType(type: String): Flow<List<QuickEntryCategoryEntity>>
 
+    @Query("SELECT * FROM quick_entry_categories WHERE is_active = 1 AND is_system = 0 AND type = :type ORDER BY sort_order ASC")
+    fun getActiveNonSystemByType(type: String): Flow<List<QuickEntryCategoryEntity>>
+
+    @Query("SELECT COUNT(*) FROM quick_entry_categories WHERE is_active = 1 AND is_system = 0 AND type = :type")
+    suspend fun getActiveNonSystemCount(type: String): Int
+
     @Query("UPDATE quick_entry_categories SET is_active = 0, updated_at = :updatedAt WHERE id = :id AND is_system = 0")
     suspend fun softDelete(id: String, updatedAt: String)
 }

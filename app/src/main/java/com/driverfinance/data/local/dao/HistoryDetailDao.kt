@@ -29,6 +29,9 @@ interface HistoryDetailDao {
     @Query("SELECT * FROM history_details WHERE linked_order_id IS NULL")
     suspend fun getUnlinked(): List<HistoryDetailEntity>
 
+    @Query("SELECT COUNT(*) FROM history_details WHERE history_trip_id = :historyTripId")
+    suspend fun getCountByHistoryTripId(historyTripId: String): Int
+
     @Query("SELECT SUM(hd.total_earning) FROM history_details hd INNER JOIN history_trips ht ON hd.history_trip_id = ht.id WHERE ht.trip_date = :date")
     suspend fun getTotalEarningByDate(date: String): Int?
 }

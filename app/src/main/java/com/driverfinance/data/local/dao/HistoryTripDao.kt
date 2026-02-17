@@ -26,6 +26,9 @@ interface HistoryTripDao {
     @Query("SELECT * FROM history_trips WHERE linked_trip_id IS NULL AND trip_date = :date")
     suspend fun getUnlinkedByDate(date: String): List<HistoryTripEntity>
 
+    @Query("SELECT * FROM history_trips WHERE trip_date = :date AND trip_time = :time AND service_type = :serviceType AND total_earning = :totalEarning LIMIT 1")
+    suspend fun findDuplicate(date: String, time: String, serviceType: String, totalEarning: Int): HistoryTripEntity?
+
     @Query("SELECT SUM(total_earning) FROM history_trips WHERE trip_date = :date")
     suspend fun getTotalEarningByDate(date: String): Int?
 }
