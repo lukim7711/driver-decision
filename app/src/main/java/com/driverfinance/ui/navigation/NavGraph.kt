@@ -20,6 +20,7 @@ import com.driverfinance.ui.screen.obligation.TemplateSetupScreen
 import com.driverfinance.ui.screen.obligation.WorkScheduleScreen
 import com.driverfinance.ui.screen.order.OrderScreen
 import com.driverfinance.ui.screen.quickentry.QuickEntryScreen
+import com.driverfinance.ui.screen.target.TargetDetailScreen
 
 /**
  * Main navigation graph.
@@ -65,6 +66,16 @@ fun NavGraph(
                 onSettingsClick = { navController.navigate(Screen.Settings.route) },
                 onCaptureManagerClick = { navController.navigate(Screen.CaptureManager.route) },
                 onDataReviewClick = { navController.navigate(Screen.DataReview.route) }
+            )
+        }
+
+        // ══════════════════════════════════════════════
+        // F007: TARGET DETAIL
+        // ══════════════════════════════════════════════
+
+        composable(Screen.TargetDetail.route) {
+            TargetDetailScreen(
+                onBackClick = { navController.popBackStack() }
             )
         }
 
@@ -182,10 +193,6 @@ fun NavGraph(
 
         composable(Screen.DataReview.route) {
             // TODO: Build DataReview screen
-        }
-
-        composable(Screen.TargetDetail.route) {
-            // TODO: Build TargetDetail screen (F007)
         }
     }
 }
