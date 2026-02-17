@@ -5,7 +5,7 @@
 ## Sesi Terakhir
 - **Tanggal**: 2026-02-18
 - **Fase**: MVP Build
-- **Status**: F001 Auto Capture Order Masuk selesai
+- **Status**: F002 Capture Riwayat Rincian Pesanan selesai
 
 ---
 
@@ -26,7 +26,7 @@
 | ID | Nama | Status | PR |
 |----|------|--------|----|
 | F001 | Auto Capture Order Masuk | ✅ | #17 |
-| F002 | Capture Riwayat Rincian Pesanan | ⬜ | — |
+| F002 | Capture Riwayat Rincian Pesanan | ✅ | #18 |
 | F003 | AI Ekstraksi Data dari Capture | ⬜ | — |
 | F004 | Input Cepat | ⬜ | — |
 | F005 | Dashboard Harian | ⬜ | — |
