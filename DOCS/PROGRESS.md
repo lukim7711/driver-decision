@@ -5,7 +5,7 @@
 ## Sesi Terakhir
 - **Tanggal**: 2026-02-18
 - **Fase**: MVP Stabilization
-- **Status**: 🎉 ALL MVP FEATURES COMPLETE + CI GREEN!
+- **Status**: 🎉 ALL MVP FEATURES COMPLETE — Bug fixing in progress
 
 ---
 
@@ -60,6 +60,7 @@
 | ID | Nama | Status | PR |
 |----|------|--------|----|
 | BUG-001 | Fix all compilation errors (DAO-Repo mismatch, Hilt DI, ChatMessage type) | ✅ | #27 |
+| BUG-002 | Fix preset seeding missing, Groq API key env fallback, numpad layout overflow, chat error detail | 🔄 In Progress | — |
 
 ---
 
@@ -75,3 +76,10 @@
 - Architecture: Repository → UseCase → ViewModel → Screen
 - All offline-first except F008 (AI Chat requires internet)
 - CI: compileDebugKotlin ✅, hiltJavaCompileDebug ✅, lintDebug → pending
+
+## BUG-002 Notes
+- **Preset Seeding**: DatabaseModule.SeedDatabaseCallback hanya seed categories, tidak seed presets → shortcut nominal tidak muncul
+- **Groq API Key**: findProperty() tidak baca env var → tambah System.getenv() fallback
+- **Numpad Overflow**: NumpadContent Column tanpa verticalScroll → tombol Simpan terpotong bottom nav
+- **Chat Error**: Pesan error terlalu generik → tambah detail + API key config hint
+- ⚠️ Requires app uninstall + reinstall agar preset seed berjalan (Room onCreate callback)

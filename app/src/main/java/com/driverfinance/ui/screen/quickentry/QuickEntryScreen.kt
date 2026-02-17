@@ -21,6 +21,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
@@ -236,7 +238,12 @@ private fun NominalSelectContent(
     onBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier = modifier.fillMaxSize().padding(Spacing.md)) {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(Spacing.md)
+    ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(text = category.emoji, style = MaterialTheme.typography.headlineMedium)
             Spacer(modifier = Modifier.width(Spacing.sm))
@@ -280,7 +287,7 @@ private fun NominalSelectContent(
             singleLine = true
         )
 
-        Spacer(modifier = Modifier.weight(1f))
+        Spacer(modifier = Modifier.height(48.dp))
         OutlinedButton(
             onClick = onBack,
             modifier = Modifier.fillMaxWidth()
@@ -306,7 +313,10 @@ private fun NumpadContent(
     val isValid = displayAmount > 0
 
     Column(
-        modifier = modifier.fillMaxSize().padding(Spacing.md),
+        modifier = modifier
+            .fillMaxWidth()
+            .verticalScroll(rememberScrollState())
+            .padding(Spacing.md),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -343,7 +353,7 @@ private fun NumpadContent(
                 row.forEach { key ->
                     FilledTonalButton(
                         onClick = { onDigit(key) },
-                        modifier = Modifier.weight(1f).height(56.dp)
+                        modifier = Modifier.weight(1f).height(48.dp)
                     ) {
                         Text(
                             text = if (key == "DEL") "\u232B" else key,
@@ -373,12 +383,15 @@ private fun NumpadContent(
             Text("Simpan")
         }
 
+        Spacer(modifier = Modifier.height(Spacing.xs))
         OutlinedButton(
             onClick = onBack,
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("\u2190 Kembali")
         }
+
+        Spacer(modifier = Modifier.height(Spacing.md))
     }
 }
 
