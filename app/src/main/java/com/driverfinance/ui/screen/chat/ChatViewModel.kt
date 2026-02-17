@@ -5,7 +5,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.driverfinance.data.remote.dto.ChatMessage
+import com.driverfinance.data.remote.model.GroqMessage
 import com.driverfinance.domain.usecase.chat.ChatMessageResult
 import com.driverfinance.domain.usecase.chat.SendChatMessageUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -52,7 +52,7 @@ class ChatViewModel @Inject constructor(
     val uiState: StateFlow<ChatUiState> = _uiState.asStateFlow()
 
     // In-memory conversation history for LLM context (§6.3.3)
-    private val conversationHistory = mutableListOf<ChatMessage>()
+    private val conversationHistory = mutableListOf<GroqMessage>()
     private var messageCounter = 0
 
     init {
@@ -91,8 +91,8 @@ class ChatViewModel @Inject constructor(
             val updatedBubbles = when (result) {
                 is ChatMessageResult.Success -> {
                     // Add to conversation history for follow-up context
-                    conversationHistory.add(ChatMessage(role = "user", content = trimmed))
-                    conversationHistory.add(ChatMessage(role = "assistant", content = result.aiResponse))
+                    conversationHistory.add(GroqMessage(role = "user", content = trimmed))
+                    conversationHistory.add(GroqMessage(role = "assistant", content = result.aiResponse))
 
                     // Trim to 20 messages max (§6.3.3)
                     while (conversationHistory.size > 20) {
