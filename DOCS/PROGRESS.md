@@ -5,7 +5,7 @@
 ## Sesi Terakhir
 - **Tanggal**: 2026-02-18
 - **Fase**: MVP Build
-- **Status**: F005 Dashboard Harian selesai
+- **Status**: F006 Manajemen Hutang selesai
 
 ---
 
@@ -30,7 +30,7 @@
 | F003 | AI Ekstraksi Data dari Capture | ✅ | #19 |
 | F004 | Input Cepat | ✅ | #20 |
 | F005 | Dashboard Harian | ✅ | #21 |
-| F006 | Manajemen Hutang | ⬜ | — |
+| F006 | Manajemen Hutang | ✅ | #22 |
 | F007 | Target Harian Otomatis | ⬜ | — |
 | F008 | AI Chat Tanya Kapan Saja | ⬜ | — |
 | F009 | Kewajiban & Jadwal | ⬜ | — |
