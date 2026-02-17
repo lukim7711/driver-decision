@@ -21,6 +21,7 @@ import com.driverfinance.ui.screen.obligation.WorkScheduleScreen
 import com.driverfinance.ui.screen.order.OrderScreen
 import com.driverfinance.ui.screen.quickentry.QuickEntryScreen
 import com.driverfinance.ui.screen.review.DataReviewScreen
+import com.driverfinance.ui.screen.target.TargetDetailScreen
 
 @Composable
 fun AppNavigation(
@@ -32,7 +33,11 @@ fun AppNavigation(
         startDestination = Screen.Dashboard.route,
         modifier = modifier
     ) {
-        composable(Screen.Dashboard.route) { DashboardScreen() }
+        composable(Screen.Dashboard.route) {
+            DashboardScreen(
+                onTargetDetailClick = { navController.navigate(Screen.TargetDetail.route) }
+            )
+        }
         composable(Screen.Order.route) { OrderScreen() }
         composable(Screen.Chat.route) { ChatScreen() }
         composable(Screen.QuickEntry.route) {
@@ -100,6 +105,9 @@ fun AppNavigation(
         }
         composable(Screen.WorkSchedule.route) {
             WorkScheduleScreen(onBack = { navController.popBackStack() })
+        }
+        composable(Screen.TargetDetail.route) {
+            TargetDetailScreen(onBack = { navController.popBackStack() })
         }
     }
 }
