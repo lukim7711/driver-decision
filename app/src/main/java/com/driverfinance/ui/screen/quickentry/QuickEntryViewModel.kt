@@ -179,7 +179,7 @@ class QuickEntryViewModel @Inject constructor(
             if (result is SaveQuickEntryUseCase.SaveResult.Success) {
                 _savedEvent.emit(SavedConfirmation(
                     categoryName = category.name,
-                    categoryIcon = category.icon,
+                    categoryIcon = category.emoji,
                     amount = amount,
                     note = note.takeIf { it.isNotBlank() }
                 ))

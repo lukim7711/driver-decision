@@ -192,7 +192,7 @@ private fun CategoryGridContent(
                         verticalArrangement = Arrangement.Center
                     ) {
                         Text(
-                            text = category.icon,
+                            text = category.emoji,
                             style = MaterialTheme.typography.headlineLarge
                         )
                         Spacer(modifier = Modifier.height(Spacing.xs))
@@ -238,7 +238,7 @@ private fun NominalSelectContent(
 ) {
     Column(modifier = modifier.fillMaxSize().padding(Spacing.md)) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(text = category.icon, style = MaterialTheme.typography.headlineMedium)
+            Text(text = category.emoji, style = MaterialTheme.typography.headlineMedium)
             Spacer(modifier = Modifier.width(Spacing.sm))
             Text(
                 text = "${category.name} \u2014 Berapa?",
@@ -310,7 +310,7 @@ private fun NumpadContent(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(text = category.icon, style = MaterialTheme.typography.headlineMedium)
+            Text(text = category.emoji, style = MaterialTheme.typography.headlineMedium)
             Spacer(modifier = Modifier.width(Spacing.sm))
             Text(
                 text = "${category.name} \u2014 Berapa?",
