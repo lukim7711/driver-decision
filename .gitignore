@@ -1,0 +1,25 @@
+# Gradle
+*.iml
+.gradle/
+build/
+local.properties
+
+# IDE
+.idea/
+*.swp
+*.swo
+
+# Android
+/captures
+.externalNativeBuild
+.cxx
+
+# Kotlin
+*.class
+
+# OS
+.DS_Store
+Thumbs.db
+
+# App specific
+app/captures/
