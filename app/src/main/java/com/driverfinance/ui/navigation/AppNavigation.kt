@@ -15,6 +15,7 @@ import com.driverfinance.ui.screen.dashboard.DashboardScreen
 import com.driverfinance.ui.screen.more.MoreScreen
 import com.driverfinance.ui.screen.order.OrderScreen
 import com.driverfinance.ui.screen.quickentry.QuickEntryScreen
+import com.driverfinance.ui.screen.review.DataReviewScreen
 
 @Composable
 fun AppNavigation(
@@ -57,6 +58,9 @@ fun AppNavigation(
             arguments = listOf(navArgument("historyTripId") { type = NavType.StringType })
         ) {
             HistoryTripDetailScreen(onBack = { navController.popBackStack() })
+        }
+        composable(Screen.DataReview.route) {
+            DataReviewScreen(onBack = { navController.popBackStack() })
         }
     }
 }
