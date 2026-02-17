@@ -27,7 +27,7 @@ class SaveCapturedOrderUseCase @Inject constructor(
         paymentMethod: String?,
         paymentAmount: Int?,
         rawText: String,
-        parseConfidence: Float,
+        parseConfidence: Double,
         sourceSnapshotId: String
     ): SaveResult {
         val now = OffsetDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)

@@ -29,15 +29,11 @@ class GetDashboardDataUseCase @Inject constructor(
                 .groupBy { it.serviceType }
                 .mapValues { it.value.size }
 
-            val activeExpenses = quickEntries.filter {
-                it.type == TYPE_EXPENSE && it.isDeleted == 0
-            }
+            val activeExpenses = quickEntries.filter { it.type == TYPE_EXPENSE }
             val totalExpense = activeExpenses.sumOf { it.amount }
             val expenseCount = activeExpenses.size
 
-            val activeIncomes = quickEntries.filter {
-                it.type == TYPE_INCOME && it.isDeleted == 0
-            }
+            val activeIncomes = quickEntries.filter { it.type == TYPE_INCOME }
             val totalOtherIncome = activeIncomes.sumOf { it.amount }
             val incomeCount = activeIncomes.size
 

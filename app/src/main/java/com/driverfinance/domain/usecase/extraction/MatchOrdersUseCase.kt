@@ -33,7 +33,7 @@ class MatchOrdersUseCase @Inject constructor(
             else -> return MatchStatus.NO_DATA
         }
 
-        val confidence = if (status == STATUS_MATCHED) 1.0f else 0.0f
+        val confidence = if (status == STATUS_MATCHED) 1.0 else 0.0
 
         val existing = capturedOrderId?.let {
             extractionRepository.getMatchedOrderByCapturedOrderId(it)

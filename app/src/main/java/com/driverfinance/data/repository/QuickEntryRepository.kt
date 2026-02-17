@@ -23,6 +23,8 @@ class QuickEntryRepository @Inject constructor(
 
     suspend fun updateEntry(entry: QuickEntryEntity) = entryDao.update(entry)
 
+    suspend fun deleteEntry(entry: QuickEntryEntity) = entryDao.delete(entry)
+
     suspend fun getEntryById(id: String): QuickEntryEntity? = entryDao.getById(id)
 
     fun getTodayEntries(date: String, type: String): Flow<List<QuickEntryEntity>> =
@@ -31,8 +33,8 @@ class QuickEntryRepository @Inject constructor(
     fun getTodayAllEntries(date: String): Flow<List<QuickEntryEntity>> =
         entryDao.getByDate(date)
 
-    suspend fun getTodaySummary(date: String, type: String): Int =
-        entryDao.getSumByDateAndType(date, type) ?: 0
+    suspend fun getTodaySummary(dateLike: String, type: String): Int =
+        entryDao.getSumByDateAndType(dateLike, type) ?: 0
 
     suspend fun getTodayCount(date: String, type: String): Int =
         entryDao.getCountByDateAndType(date, type)

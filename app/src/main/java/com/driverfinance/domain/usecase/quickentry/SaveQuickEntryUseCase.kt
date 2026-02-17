@@ -30,9 +30,7 @@ class SaveQuickEntryUseCase @Inject constructor(
             note = note?.takeIf { it.isNotBlank() },
             entryDate = LocalDate.now().toString(),
             entryTime = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")),
-            isDeleted = 0,
-            createdAt = now.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME),
-            updatedAt = now.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
+            createdAt = now.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
         )
         repository.saveEntry(entity)
         return SaveResult.Success(entity.id)

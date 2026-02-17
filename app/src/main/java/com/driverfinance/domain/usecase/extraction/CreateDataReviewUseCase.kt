@@ -24,7 +24,7 @@ class CreateDataReviewUseCase @Inject constructor(
         fieldName: String,
         originalValue: String,
         suggestedValue: String?,
-        confidence: Float
+        confidence: Double
     ): ReviewAction {
         if (confidence >= HIGH_CONFIDENCE) return ReviewAction.AUTO_ACCEPTED
 
@@ -59,9 +59,9 @@ class CreateDataReviewUseCase @Inject constructor(
     }
 
     companion object {
-        const val HIGH_CONFIDENCE = 0.85f
-        const val MEDIUM_CONFIDENCE = 0.60f
-        const val LOW_CONFIDENCE = 0.30f
+        const val HIGH_CONFIDENCE = 0.85
+        const val MEDIUM_CONFIDENCE = 0.60
+        const val LOW_CONFIDENCE = 0.30
         const val REVIEW_PENDING = "PENDING"
     }
 }

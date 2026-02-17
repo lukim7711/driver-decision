@@ -1,6 +1,7 @@
 package com.driverfinance.domain.usecase.capture
 
 import com.driverfinance.data.repository.CaptureRepository
+import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
 class MatchF001F002UseCase @Inject constructor(
@@ -13,7 +14,7 @@ class MatchF001F002UseCase @Inject constructor(
      * Returns the number of newly matched records.
      */
     suspend operator fun invoke(historyTripId: String): Int {
-        val details = repository.getDetailsByHistoryTripIdOnce(historyTripId)
+        val details = repository.getDetailsByHistoryTripId(historyTripId).first()
         var matchCount = 0
 
         details.forEach { detail ->

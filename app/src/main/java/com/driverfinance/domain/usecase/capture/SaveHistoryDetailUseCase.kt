@@ -30,7 +30,7 @@ class SaveHistoryDetailUseCase @Inject constructor(
         timePickedUp: String?,
         timeCompleted: String?,
         rawText: String,
-        parseConfidence: Float,
+        parseConfidence: Double,
         sourceSnapshotId: String
     ): SaveResult {
         val now = OffsetDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)

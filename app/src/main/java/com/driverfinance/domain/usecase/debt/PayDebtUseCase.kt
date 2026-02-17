@@ -48,9 +48,7 @@ class PayDebtUseCase @Inject constructor(
                     note = note,
                     entryDate = today,
                     entryTime = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")),
-                    isDeleted = 0,
-                    createdAt = nowStr,
-                    updatedAt = nowStr
+                    createdAt = nowStr
                 )
                 quickEntryRepository.saveEntry(entry)
                 linkedExpenseId = expenseId
@@ -63,6 +61,7 @@ class PayDebtUseCase @Inject constructor(
             amount = effectiveAmount,
             paymentType = input.paymentType,
             includeAsExpense = if (input.includeAsExpense) 1 else 0,
+            categoryId = input.systemCategoryId ?: "",
             linkedExpenseId = linkedExpenseId,
             paymentDate = today,
             note = input.note,

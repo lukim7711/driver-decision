@@ -23,7 +23,7 @@ class SaveScreenSnapshotUseCase @Inject constructor(
         val snapshot = ScreenSnapshotEntity(
             id = id,
             screenType = screenType,
-            imagePath = imagePath,
+            imagePath = imagePath ?: "",
             rawText = rawText,
             nodeTreeJson = nodeTreeJson,
             isProcessed = 0,
