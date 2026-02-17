@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Light Mode Quick Entry V2</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --primary-color: #EF4444;--primary-hover: #DC2626;
+            --secondary-color: #22C55E;
+            --bg-color: #FFFFFF;--card-bg: #F3F4F6;--text-color: #111827;--text-secondary: #4B5563;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            -webkit-font-smoothing: antialiased;
+        }
+        .ios-status-bar {
+            height: 47px;
+            width: 100%;
+        }
+        .ios-home-indicator {
+            height: 34px;
+            width: 100%;
+        }
+        .grid-button:active {
+            transform: scale(0.96);
+            background-color: #E5E7EB;
+        }
+        .grid-button.active {
+            border-color: var(--primary-color);
+            background-color: #FEF2F2;}
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+    </style>
+<style>
+        body {
+          min-height: max(884px, 100dvh);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="h-screen flex flex-col relative overflow-hidden bg-white text-gray-900">
+<div class="ios-status-bar flex items-end justify-between px-6 pb-2 text-gray-900">
+<span class="text-sm font-semibold">9:41</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">signal_cellular_alt</span>
+<span class="material-symbols-outlined text-[18px]">wifi</span>
+<span class="material-symbols-outlined text-[18px]">battery_full</span>
+</div>
+</div>
+<header class="px-4 py-3 flex items-center justify-between border-b border-gray-100 bg-white z-10">
+<button class="p-2 -ml-2 text-gray-500 hover:bg-gray-50 rounded-full transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+<h1 class="text-lg font-bold text-gray-900">Input Cepat</h1>
+<button class="p-2 -mr-2 text-gray-500 hover:bg-gray-50 rounded-full transition-colors">
+<span class="material-symbols-outlined">history</span>
+</button>
+</header>
+<main class="flex-1 flex flex-col relative bg-white">
+<div class="p-4 pb-2">
+<div class="flex p-1 bg-gray-100 rounded-xl border border-gray-200">
+<button class="flex-1 py-3 px-4 rounded-lg bg-[var(--primary-color)] text-white font-bold shadow-sm text-center transition-all">
+                    Pengeluaran
+                </button>
+<button class="flex-1 py-3 px-4 rounded-lg text-gray-500 font-semibold text-center hover:text-gray-900 transition-all">
+                    Pemasukan
+                </button>
+</div>
+</div>
+<div class="px-6 py-4 text-center">
+<p class="text-gray-500 text-sm mb-2 font-semibold">Total Hari Ini</p>
+<div class="flex flex-col items-center justify-center bg-gray-50 rounded-2xl py-5 border border-gray-200 shadow-sm">
+<div class="flex items-center gap-2 text-gray-900">
+<span class="material-symbols-outlined text-2xl text-[var(--primary-color)]">trending_down</span>
+<span class="text-4xl font-extrabold tracking-tight">Rp70.000</span>
+</div>
+<p class="text-xs text-gray-500 mt-2 font-medium bg-white px-3 py-1 rounded-full border border-gray-200 shadow-sm">3 transaksi pengeluaran</p>
+</div>
+</div>
+<div class="flex-1 px-4 pb-4 overflow-y-auto">
+<div class="grid grid-cols-2 gap-4 h-full content-start">
+<button class="grid-button bg-white rounded-2xl p-6 flex flex-col items-center justify-center gap-3 border border-gray-200 shadow-sm transition-all hover:border-gray-300 hover:shadow-md">
+<div class="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center text-gray-600">
+<span class="material-symbols-outlined text-3xl">local_gas_station</span>
+</div>
+<span class="text-lg font-semibold text-gray-700">Bensin</span>
+</button>
+<button class="grid-button active rounded-2xl p-6 flex flex-col items-center justify-center gap-3 border-2 border-[var(--primary-color)] transition-all bg-red-50 relative overflow-hidden shadow-md">
+<div class="absolute top-3 right-3 w-2 h-2 rounded-full bg-[var(--primary-color)] animate-pulse"></div>
+<div class="w-14 h-14 rounded-full bg-[var(--primary-color)] flex items-center justify-center text-white shadow-sm">
+<span class="material-symbols-outlined text-3xl">restaurant</span>
+</div>
+<span class="text-lg font-bold text-gray-900">Makan</span>
+</button>
+<button class="grid-button bg-white rounded-2xl p-6 flex flex-col items-center justify-center gap-3 border border-gray-200 shadow-sm transition-all hover:border-gray-300 hover:shadow-md">
+<div class="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center text-gray-600">
+<span class="material-symbols-outlined text-3xl">local_parking</span>
+</div>
+<span class="text-lg font-semibold text-gray-700">Parkir</span>
+</button>
+<button class="grid-button bg-white rounded-2xl p-6 flex flex-col items-center justify-center gap-3 border border-gray-200 shadow-sm transition-all hover:border-gray-300 hover:shadow-md">
+<div class="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center text-gray-600">
+<span class="material-symbols-outlined text-3xl">smoking_rooms</span>
+</div>
+<span class="text-lg font-semibold text-gray-700">Rokok</span>
+</button>
+<button class="grid-button bg-white rounded-2xl p-6 flex flex-col items-center justify-center gap-3 border border-gray-200 shadow-sm transition-all hover:border-gray-300 hover:shadow-md">
+<div class="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center text-gray-600">
+<span class="material-symbols-outlined text-3xl">water_drop</span>
+</div>
+<span class="text-lg font-semibold text-gray-700">Minum</span>
+</button>
+<button class="grid-button bg-white rounded-2xl p-6 flex flex-col items-center justify-center gap-3 border border-gray-200 shadow-sm transition-all hover:border-gray-300 hover:shadow-md">
+<div class="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center text-gray-600">
+<span class="material-symbols-outlined text-3xl">more_horiz</span>
+</div>
+<span class="text-lg font-semibold text-gray-700">Lainnya</span>
+</button>
+</div>
+</div>
+<div class="absolute inset-0 bg-black/20 z-40 backdrop-blur-[2px]" style="top: -100px; bottom: -100px;"></div>
+<div class="absolute bottom-0 left-0 w-full bg-white border-t border-gray-100 rounded-t-[32px] shadow-[0_-8px_40px_rgba(0,0,0,0.15)] transform transition-transform duration-300 z-50 flex flex-col">
+<div class="w-full flex justify-center pt-4 pb-2">
+<div class="w-12 h-1.5 bg-gray-300 rounded-full"></div>
+</div>
+<div class="px-6 pb-4 pt-2 flex justify-between items-end border-b border-gray-100">
+<div>
+<span class="text-gray-500 text-xs font-bold uppercase tracking-wider mb-2 block">Kategori</span>
+<div class="flex items-center gap-3">
+<div class="p-2.5 bg-red-50 rounded-xl text-[var(--primary-color)]">
+<span class="material-symbols-outlined text-2xl">restaurant</span>
+</div>
+<h2 class="text-2xl font-bold text-gray-900">Makan</h2>
+</div>
+</div>
+<div class="text-right flex flex-col justify-end h-full">
+<span class="text-gray-500 text-xs font-bold uppercase tracking-wider mb-2 block">Nominal</span>
+<div class="text-3xl font-mono font-bold text-gray-900 tracking-tight leading-none">Rp<span class="text-gray-300 ml-1">0</span></div>
+</div>
+</div>
+<div class="p-4 grid grid-cols-3 gap-3">
+<button class="h-14 bg-white hover:bg-gray-50 active:bg-gray-100 rounded-xl font-bold text-lg text-gray-700 border border-gray-300 shadow-sm transition-colors">
+                    10rb
+                </button>
+<button class="h-14 bg-white hover:bg-gray-50 active:bg-gray-100 rounded-xl font-bold text-lg text-gray-700 border border-gray-300 shadow-sm transition-colors">
+                    15rb
+                </button>
+<button class="h-14 bg-white hover:bg-gray-50 active:bg-gray-100 rounded-xl font-bold text-lg text-gray-700 border border-gray-300 shadow-sm transition-colors">
+                    20rb
+                </button>
+<button class="h-14 bg-white hover:bg-gray-50 active:bg-gray-100 rounded-xl font-bold text-lg text-gray-700 border border-gray-300 shadow-sm transition-colors">
+                    25rb
+                </button>
+<button class="h-14 bg-white hover:bg-gray-50 active:bg-gray-100 rounded-xl font-bold text-lg text-gray-700 border border-gray-300 shadow-sm transition-colors">
+                    50rb
+                </button>
+<button class="h-14 bg-white hover:bg-gray-50 active:bg-gray-100 rounded-xl font-bold text-lg text-gray-700 border border-gray-300 shadow-sm transition-colors">
+                    100rb
+                </button>
+</div>
+<div class="px-4 pb-8 pt-2 flex gap-3">
+<button class="flex-1 py-4 bg-white hover:bg-gray-50 text-gray-700 rounded-xl font-bold flex items-center justify-center gap-2 border-2 border-gray-200 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-gray-500">keyboard</span>
+                    Manual
+                </button>
+<button class="flex-[2] py-4 bg-[var(--primary-color)] hover:bg-[var(--primary-hover)] text-white rounded-xl font-bold text-lg shadow-lg shadow-red-200 flex items-center justify-center gap-2 transition-transform active:scale-[0.98]">
+                    Simpan
+                    <span class="material-symbols-outlined">check_circle</span>
+</button>
+</div>
+<div class="h-6 w-full"></div> 
+</div>
+</main>
+<div class="ios-home-indicator"></div>
+
+</body></html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Chat Financial Advisor</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --primary-color: #16A34A;--primary-bg: #F0FDF4;--secondary-color: #3B82F6;--bg-color: #F8FAFC;--text-primary: #1E293B;--text-secondary: #64748B;--chat-bubble-ai: #FFFFFF;
+            --chat-bubble-user: #16A34A;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex flex-col h-screen max-w-md mx-auto bg-slate-50 relative overflow-hidden">
+<header class="bg-white px-4 py-3 flex items-center shadow-sm z-20 shrink-0">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 mr-2 text-slate-600">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<div class="flex-1">
+<h1 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+<span class="material-symbols-outlined text-green-600 fill-1">smart_toy</span>
+                Asisten Keuangan
+            </h1>
+<p class="text-xs text-slate-500">Online • Siap membantu</p>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 text-slate-600">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</header>
+<main class="flex-1 overflow-y-auto p-4 space-y-6 hide-scrollbar bg-slate-50 pb-24">
+<div class="flex justify-center">
+<span class="text-xs font-medium text-slate-400 bg-slate-200/50 px-3 py-1 rounded-full">Hari ini, 14:30</span>
+</div>
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center shrink-0 border border-green-200">
+<span class="material-symbols-outlined text-green-600 text-lg fill-1">smart_toy</span>
+</div>
+<div class="flex flex-col gap-1 max-w-[85%]">
+<div class="bg-white p-3.5 rounded-2xl rounded-tl-none shadow-sm border border-slate-100 text-slate-700 text-sm leading-relaxed">
+                    Halo, Pak Budi! 👋 Ada yang bisa saya bantu soal keuangan hari ini?
+                </div>
+</div>
+</div>
+<div class="flex gap-3 flex-row-reverse">
+<div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center shrink-0 overflow-hidden">
+<img alt="User" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtGCkQRAGdEhhOaApwshZQqFH1_i3YMvwJNw6iUwxXxGBHfbX4J-2ZbE4A_47LNI3e8i01OH5l6WYOJDjeYDH4t9C6aSA1UIqgFbrrPwzcKLPQQpB7g7XIKeQYhlCaEQFUNIVD_6yZxfdrGt126sYaMp4LdC4SESq1k8gl9z04hGdG6T4TkxwjQl_BjhlDydG2h-QTMMdGFBJq3OGiCbxFlA2ATM17j0VCcamxF7UfWMsyqQ4hZQbjLjf_DYEn1BkwKMfjdP75Cg"/>
+</div>
+<div class="flex flex-col gap-1 max-w-[85%] items-end">
+<div class="bg-green-600 p-3.5 rounded-2xl rounded-tr-none shadow-sm text-white text-sm leading-relaxed">
+                    Gimana performa saya sampai sore ini? Masih aman buat target bulanan?
+                </div>
+<span class="text-[10px] text-slate-400 mr-1">14:31</span>
+</div>
+</div>
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center shrink-0 border border-green-200">
+<span class="material-symbols-outlined text-green-600 text-lg fill-1">smart_toy</span>
+</div>
+<div class="flex flex-col gap-1 max-w-[85%]">
+<div class="bg-white p-4 rounded-2xl rounded-tl-none shadow-sm border border-slate-100 text-slate-700 text-sm leading-relaxed">
+<p class="mb-3">
+                        Berikut ringkasan performa Bapak hari ini:
+                    </p>
+<div class="bg-green-50 p-3 rounded-xl border border-green-100 mb-3 space-y-2">
+<div class="flex justify-between items-center border-b border-green-100 pb-2">
+<span class="text-slate-600 text-xs">Total Trip</span>
+<span class="font-bold text-slate-800">8 trip</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-slate-600 text-xs">Profit Bersih</span>
+<span class="font-bold text-green-700">Rp102.000</span>
+</div>
+</div>
+<p>
+                        Untuk mencapai target harian Rp150.000, saya sarankan Bapak menyelesaikan <span class="font-bold text-slate-900">1-2 trip lagi</span> (sekitar Rp48.000).
+                    </p>
+<div class="mt-3 pt-3 border-t border-slate-100">
+<p class="text-xs text-slate-500 italic">
+                            💡 Tip: Jam sibuk sore akan dimulai pukul 16:00 di area Sudirman. Potensi harga lebih tinggi!
+                        </p>
+</div>
+</div>
+<span class="text-[10px] text-slate-400 ml-1">14:32</span>
+</div>
+</div>
+</main>
+<div class="absolute bottom-[72px] left-0 right-0 px-4 pb-2 bg-gradient-to-t from-slate-50 via-slate-50 to-transparent pt-6 flex gap-2 overflow-x-auto hide-scrollbar z-10">
+<button class="whitespace-nowrap bg-white border border-slate-200 text-slate-600 text-xs py-1.5 px-3 rounded-full shadow-sm hover:bg-slate-50 hover:border-green-200 active:scale-95 transition-transform">
+            📈 Cek grafik minggu ini
+        </button>
+<button class="whitespace-nowrap bg-white border border-slate-200 text-slate-600 text-xs py-1.5 px-3 rounded-full shadow-sm hover:bg-slate-50 hover:border-green-200 active:scale-95 transition-transform">
+            💰 Ada tagihan minggu depan?
+        </button>
+<button class="whitespace-nowrap bg-white border border-slate-200 text-slate-600 text-xs py-1.5 px-3 rounded-full shadow-sm hover:bg-slate-50 hover:border-green-200 active:scale-95 transition-transform">
+            🎯 Ubah target harian
+        </button>
+</div>
+<div class="absolute bottom-0 left-0 right-0 bg-white border-t border-slate-200 px-4 py-3 pb-8 z-20"> 
+<div class="flex items-end gap-2">
+<button class="p-2 text-slate-400 hover:text-green-600 hover:bg-green-50 rounded-full transition-colors shrink-0">
+<span class="material-symbols-outlined text-[24px]">add_circle</span>
+</button>
+<div class="flex-1 bg-slate-100 rounded-2xl px-4 py-2 min-h-[44px] flex items-center focus-within:ring-2 focus-within:ring-green-500/20 focus-within:bg-white border border-transparent focus-within:border-green-500 transition-all">
+<input class="bg-transparent border-none w-full text-sm text-slate-800 placeholder-slate-400 focus:ring-0 p-0" placeholder="Tanya asisten..." type="text"/>
+</div>
+<button class="p-2 bg-green-600 text-white rounded-full hover:bg-green-700 shadow-md shadow-green-600/20 active:scale-95 transition-all shrink-0">
+<span class="material-symbols-outlined text-[20px] translate-x-0.5">send</span>
+</button>
+</div>
+</div>
+
+</body></html>

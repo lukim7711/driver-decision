@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Data Verification List</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --primary-color: #EF4444;--secondary-color: #3B82F6;--bg-color: #F3F4F6;
+            --card-bg: #FFFFFF;
+            --text-main: #111827;
+            --text-sub: #6B7280;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-gray-50 text-gray-900 min-h-screen flex justify-center">
+<div class="w-full max-w-md bg-white min-h-screen shadow-xl relative flex flex-col">
+<div class="sticky top-0 z-10 bg-white border-b border-gray-100">
+<div class="px-4 py-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<button class="material-symbols-outlined text-gray-600 hover:text-gray-900 transition-colors">arrow_back</button>
+<h1 class="text-lg font-bold text-gray-900">Data Perlu Dicek</h1>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-gray-400 text-[20px]">help</span>
+</div>
+</div>
+<div class="px-4 pb-4">
+<div class="bg-orange-50 border border-orange-100 rounded-lg p-3 flex items-start gap-3">
+<span class="material-symbols-outlined text-orange-500 text-[20px] mt-0.5">warning</span>
+<div>
+<p class="text-sm font-semibold text-orange-800">3 data butuh perhatian</p>
+<p class="text-xs text-orange-700 mt-0.5">Sistem mendeteksi anomali pada data yang ditangkap. Mohon konfirmasi.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto p-4 space-y-4">
+<div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+<div class="px-4 py-3 bg-gray-50 border-b border-gray-100 flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="flex h-2 w-2 rounded-full bg-red-500"></span>
+<span class="text-xs font-medium text-red-600">Confidence: 25%</span>
+</div>
+<span class="text-xs text-gray-500 font-mono">#260210C0XGW</span>
+</div>
+<div class="p-4">
+<div class="flex items-start gap-3 mb-4">
+<div class="bg-red-50 p-2 rounded-full shrink-0">
+<span class="material-symbols-outlined text-red-500 text-[20px]">attach_money</span>
+</div>
+<div>
+<p class="text-sm text-gray-600 mb-1">Masalah Pendapatan</p>
+<p class="text-base font-medium text-gray-900 leading-snug">
+                                Pendapatan terbaca: <span class="line-through text-gray-400">Rp1.920</span>. <br/>
+                                Maksudnya <span class="text-green-600 font-bold">Rp19.200</span>?
+                            </p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3 mt-2">
+<button class="flex items-center justify-center px-4 py-2.5 bg-white border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-200">
+<span class="material-symbols-outlined text-[18px] mr-1.5">edit</span>
+                            Edit
+                        </button>
+<button class="flex items-center justify-center px-4 py-2.5 bg-blue-600 rounded-lg text-sm font-medium text-white hover:bg-blue-700 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-blue-500">
+                            Ya, Rp19.200
+                        </button>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+<div class="px-4 py-3 bg-gray-50 border-b border-gray-100 flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="flex h-2 w-2 rounded-full bg-yellow-400"></span>
+<span class="text-xs font-medium text-yellow-600">Confidence: 45%</span>
+</div>
+<span class="text-xs text-gray-500 font-mono">#260210BA78D4</span>
+</div>
+<div class="p-4">
+<div class="flex items-start gap-3 mb-4">
+<div class="bg-yellow-50 p-2 rounded-full shrink-0">
+<span class="material-symbols-outlined text-yellow-600 text-[20px]">location_on</span>
+</div>
+<div>
+<p class="text-sm text-gray-600 mb-1">Alamat Tidak Lengkap</p>
+<div class="text-base text-gray-900 leading-snug">
+<p class="mb-1">Terbaca: "Jl. Kusuma IV, Grog..."</p>
+<p class="text-sm text-gray-500 bg-gray-50 p-2 rounded border border-gray-100 italic">
+                                    AI menyarankan: "Jl. Kusuma IV, Grogol Petamburan"
+                                </p>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3 mt-2">
+<button class="flex items-center justify-center px-4 py-2.5 bg-white border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">
+<span class="material-symbols-outlined text-[18px] mr-1.5">edit</span>
+                            Koreksi
+                        </button>
+<button class="flex items-center justify-center px-4 py-2.5 bg-blue-600 rounded-lg text-sm font-medium text-white hover:bg-blue-700 transition-colors shadow-sm">
+                            Terima Saran
+                        </button>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden opacity-70">
+<div class="px-4 py-3 bg-gray-50 border-b border-gray-100 flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="flex h-2 w-2 rounded-full bg-yellow-400"></span>
+<span class="text-xs font-medium text-yellow-600">Confidence: 60%</span>
+</div>
+<span class="text-xs text-gray-500 font-mono">#260210BVSAY2</span>
+</div>
+<div class="p-4">
+<div class="flex items-start gap-3 mb-2">
+<div class="bg-yellow-50 p-2 rounded-full shrink-0">
+<span class="material-symbols-outlined text-yellow-600 text-[20px]">person</span>
+</div>
+<div>
+<p class="text-sm text-gray-600 mb-1">Nama Customer Rancu</p>
+<p class="text-sm text-gray-900">
+                                Terbaca simbol aneh pada nama customer "Budi ðŸ˜Ž Santoso".
+                            </p>
+</div>
+</div>
+<button class="w-full mt-3 py-2 text-sm text-blue-600 font-medium border border-blue-100 bg-blue-50 rounded-lg">
+                        Tinjau Manual
+                    </button>
+</div>
+</div>
+</div>
+<div class="sticky bottom-0 bg-white border-t border-gray-100 p-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+<button class="w-full flex items-center justify-center gap-2 bg-gray-900 text-white font-semibold py-3.5 px-4 rounded-xl shadow-lg hover:bg-gray-800 transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+                Konfirmasi Semua &amp; Simpan
+            </button>
+</div>
+</div>
+
+</body></html>

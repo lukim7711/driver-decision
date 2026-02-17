@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Capture Manager Status</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --primary-orange: #EE4D2D;
+            --primary-dark: #C93C1F;
+            --background-gray: #F5F5F5;
+            --success-green: #2ECC71;
+            --text-dark: #212121;
+            --text-gray: #757575;
+            --border-light: #E0E0E0;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-[var(--background-gray)] text-[var(--text-dark)] min-h-screen flex flex-col antialiased">
+<div class="bg-white px-4 pt-12 pb-4 shadow-sm sticky top-0 z-10">
+<div class="flex items-center gap-4 mb-4">
+<button class="material-symbols-outlined text-2xl text-[var(--text-dark)]">arrow_back</button>
+<h1 class="text-xl font-bold flex-1">Capture Manager</h1>
+<button class="material-symbols-outlined text-2xl text-[var(--text-dark)]">settings</button>
+</div>
+<div class="flex border-b border-[var(--border-light)]">
+<button class="flex-1 pb-3 text-[var(--primary-orange)] border-b-2 border-[var(--primary-orange)] font-semibold text-sm">
+                Order Masuk
+            </button>
+<button class="flex-1 pb-3 text-[var(--text-gray)] font-medium text-sm">
+                Riwayat
+            </button>
+</div>
+</div>
+<main class="flex-1 overflow-y-auto pb-24">
+<div class="bg-white p-4 mb-2">
+<div class="flex items-center gap-2 mb-4">
+<span class="text-[var(--success-green)] text-[10px] material-symbols-outlined filled" style="font-variation-settings: 'FILL' 1">circle</span>
+<span class="font-medium text-sm">Aktif (Auto Capture)</span>
+</div>
+<div class="bg-gray-50 rounded-lg p-4 border border-[var(--border-light)]">
+<p class="text-xs text-[var(--text-gray)] mb-2 font-medium uppercase tracking-wide">Hari Ini</p>
+<div class="flex items-center justify-between">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-[var(--primary-orange)] text-xl">package_2</span>
+<span class="text-2xl font-bold">5</span>
+</div>
+<span class="text-xs text-[var(--text-gray)]">Order Ter-capture</span>
+</div>
+<div class="h-8 w-px bg-gray-300"></div>
+<div class="text-right">
+<div class="flex items-center justify-end gap-2 mb-1">
+<span class="material-symbols-outlined text-[var(--primary-orange)] text-xl">local_shipping</span>
+<span class="text-2xl font-bold">2</span>
+</div>
+<span class="text-xs text-[var(--text-gray)]">Total Trip</span>
+</div>
+</div>
+</div>
+</div>
+<div class="px-4 py-3 flex items-center justify-between">
+<h2 class="text-sm font-semibold text-[var(--text-gray)]">Daftar Trip Hari Ini</h2>
+<span class="text-xs text-[var(--text-gray)]">2 Trip</span>
+</div>
+<div class="space-y-3 px-4">
+<div class="bg-white rounded-xl shadow-sm border border-[var(--border-light)] overflow-hidden active:bg-gray-50 transition-colors cursor-pointer">
+<div class="p-4">
+<div class="flex justify-between items-start mb-2">
+<div>
+<div class="flex items-center gap-2">
+<h3 class="font-bold text-base">Trip #1</h3>
+<span class="text-xs bg-gray-100 px-2 py-0.5 rounded text-[var(--text-gray)]">16:42</span>
+</div>
+<p class="text-xs text-[var(--text-gray)] mt-0.5">3 pesanan · SPX Instant</p>
+</div>
+<span class="font-bold text-[var(--primary-orange)]">Rp39.200</span>
+</div>
+<div class="h-px bg-gray-100 my-3"></div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[var(--success-green)] text-sm">check_circle</span>
+<span class="text-xs text-[var(--text-gray)]">Semua pesanan ter-capture</span>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-sm border border-[var(--border-light)] overflow-hidden active:bg-gray-50 transition-colors cursor-pointer">
+<div class="p-4">
+<div class="flex justify-between items-start mb-2">
+<div>
+<div class="flex items-center gap-2">
+<h3 class="font-bold text-base">Trip #2</h3>
+<span class="text-xs bg-gray-100 px-2 py-0.5 rounded text-[var(--text-gray)]">20:43</span>
+</div>
+<p class="text-xs text-[var(--text-gray)] mt-0.5">2 pesanan · ShopeeFood</p>
+</div>
+<span class="font-bold text-[var(--primary-orange)]">Rp19.200</span>
+</div>
+<div class="h-px bg-gray-100 my-3"></div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[var(--success-green)] text-sm">check_circle</span>
+<span class="text-xs text-[var(--text-gray)]">Semua pesanan ter-capture</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<div class="fixed bottom-0 left-0 right-0 bg-white border-t border-[var(--border-light)] p-4 pb-8">
+<button class="w-full flex items-center justify-center gap-2 border border-red-100 bg-red-50 text-red-600 font-semibold py-3.5 px-4 rounded-lg hover:bg-red-100 transition-colors">
+<span class="material-symbols-outlined text-xl">power_settings_new</span>
+            Nonaktifkan Auto Capture
+        </button>
+</div>
+
+</body></html>

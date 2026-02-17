@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Daftar Hutang Aktif Driver</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --primary-color: #16A34A;--primary-bg: #F0FDF4;--danger-color: #DC2626;--danger-bg: #FEF2F2;--warning-color: #CA8A04;--warning-bg: #FEFCE8;--text-primary: #1F2937;--text-secondary: #6B7280;}
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F3F4F6;
+            color: var(--text-primary);
+            -webkit-tap-highlight-color: transparent;
+        }
+        .safe-area-top {
+            padding-top: env(safe-area-inset-top);
+        }
+        .safe-area-bottom {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex flex-col h-screen overflow-hidden">
+<header class="bg-white shadow-sm z-10 safe-area-top">
+<div class="px-4 py-3 flex items-center justify-between">
+<button class="p-2 -ml-2 text-gray-600 rounded-full hover:bg-gray-100 active:bg-gray-200 transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-lg font-semibold text-gray-900">Hutang</h1>
+<div class="w-10"></div> 
+</div>
+</header>
+<main class="flex-1 overflow-y-auto hide-scrollbar pb-24">
+<div class="bg-white p-6 mb-2">
+<div class="space-y-4">
+<div>
+<p class="text-sm text-gray-500 mb-1">Total Sisa Hutang</p>
+<h2 class="text-3xl font-bold text-gray-900 tracking-tight">Rp14.575.000</h2>
+</div>
+<div class="flex items-center space-x-2 pt-2 border-t border-gray-100">
+<span class="material-symbols-outlined text-gray-400 text-[20px]">calendar_today</span>
+<p class="text-sm text-gray-600">Cicilan Per Bulan: <span class="font-semibold text-gray-900">Rp1.400.000</span></p>
+</div>
+</div>
+</div>
+<div class="px-4 py-3">
+<div class="flex items-center space-x-2 mb-3">
+<h3 class="text-xs font-semibold uppercase tracking-wider text-gray-500">Aktif</h3>
+<div class="h-px bg-gray-200 flex-1"></div>
+</div>
+<div class="space-y-3">
+<div class="bg-white rounded-xl shadow-sm p-4 border border-gray-100 active:scale-[0.98] transition-transform duration-100 cursor-pointer">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center space-x-3">
+<div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600">
+<span class="material-symbols-outlined">motorcycle</span>
+</div>
+<div>
+<h4 class="font-semibold text-gray-900">Cicilan Motor Honda BeAT</h4>
+<p class="text-xs text-gray-500">Jatuh tempo: tgl 15</p>
+</div>
+</div>
+<span class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-green-50 text-green-700 ring-1 ring-inset ring-green-600/20">
+                            On-track
+                        </span>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<div>
+<p class="text-xs text-gray-500">Sisa Hutang</p>
+<p class="text-lg font-bold text-gray-900">Rp12.350.000</p>
+</div>
+<div class="text-right">
+<p class="text-xs text-gray-500">Cicilan/bln</p>
+<p class="text-sm font-semibold text-gray-900">Rp650.000</p>
+</div>
+</div>
+<div class="w-full bg-gray-100 rounded-full h-1.5">
+<div class="bg-green-500 h-1.5 rounded-full" style="width: 27%"></div>
+</div>
+<p class="text-[10px] text-gray-400 text-right">27% Lunas</p>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-sm p-4 border border-red-200 relative overflow-hidden active:scale-[0.98] transition-transform duration-100 cursor-pointer">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-red-500"></div>
+<div class="pl-2">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center space-x-3">
+<div class="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center text-red-600">
+<span class="material-symbols-outlined">smartphone</span>
+</div>
+<div>
+<h4 class="font-semibold text-gray-900">Pinjol Akulaku</h4>
+<p class="text-xs text-red-600 font-medium">Jatuh tempo: tgl 10</p>
+</div>
+</div>
+<span class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-red-50 text-red-700 ring-1 ring-inset ring-red-600/20 animate-pulse">
+                                Telat 5 hari
+                            </span>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<div>
+<p class="text-xs text-gray-500">Sisa + Denda</p>
+<div class="flex items-baseline space-x-1">
+<p class="text-lg font-bold text-gray-900">Rp1.575.000</p>
+</div>
+<p class="text-[10px] text-red-500 font-medium mt-0.5 flex items-center">
+<span class="material-symbols-outlined text-[12px] mr-1">warning</span>
+                                        Denda berjalan Rp75.000
+                                    </p>
+</div>
+<div class="text-right">
+<p class="text-xs text-gray-500">Cicilan/bln</p>
+<p class="text-sm font-semibold text-gray-900">Rp750.000</p>
+</div>
+</div>
+<div class="w-full bg-gray-100 rounded-full h-1.5">
+<div class="bg-red-500 h-1.5 rounded-full" style="width: 25%"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-sm p-4 border border-gray-100 active:scale-[0.98] transition-transform duration-100 cursor-pointer">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center space-x-3">
+<div class="w-10 h-10 rounded-full bg-yellow-50 flex items-center justify-center text-yellow-600">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div>
+<h4 class="font-semibold text-gray-900">Hutang ke Budi</h4>
+<p class="text-xs text-gray-500">Jatuh tempo: tgl 31</p>
+</div>
+</div>
+<span class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-yellow-50 text-yellow-700 ring-1 ring-inset ring-yellow-600/20">
+                            11 hari lagi
+                        </span>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<div>
+<p class="text-xs text-gray-500">Sisa Hutang</p>
+<p class="text-lg font-bold text-gray-900">Rp700.000</p>
+</div>
+</div>
+<div class="w-full bg-gray-100 rounded-full h-1.5">
+<div class="bg-yellow-500 h-1.5 rounded-full" style="width: 30%"></div>
+</div>
+<p class="text-[10px] text-gray-400 text-right">30% Lunas</p>
+</div>
+</div>
+</div>
+</div>
+<div class="px-4 py-3">
+<div class="flex items-center space-x-2 mb-3">
+<h3 class="text-xs font-semibold uppercase tracking-wider text-gray-500">Lunas</h3>
+<div class="h-px bg-gray-200 flex-1"></div>
+</div>
+<div class="bg-white rounded-xl shadow-sm p-4 border border-gray-100 opacity-60">
+<div class="flex justify-between items-center">
+<div class="flex items-center space-x-3">
+<div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-400">
+<span class="material-symbols-outlined">shopping_bag</span>
+</div>
+<div>
+<h4 class="font-semibold text-gray-900 line-through">SPayLater</h4>
+<p class="text-xs text-green-600 flex items-center">
+<span class="material-symbols-outlined text-[14px] mr-1">check_circle</span>
+                                Lunas · 3 Feb 2026
+                            </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="h-20"></div>
+</main>
+<div class="fixed bottom-24 left-1/2 transform -translate-x-1/2 z-20">
+<button class="bg-gray-900 text-white rounded-full px-6 py-3 shadow-lg flex items-center space-x-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">add</span>
+<span class="font-medium">Tambah Hutang</span>
+</button>
+</div>
+<nav class="bg-white border-t border-gray-200 fixed bottom-0 w-full z-30 safe-area-bottom">
+<div class="grid grid-cols-5 h-16">
+<a class="flex flex-col items-center justify-center text-gray-400 hover:text-gray-900" href="#">
+<span class="material-symbols-outlined text-2xl">home</span>
+<span class="text-[10px] mt-1 font-medium">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-400 hover:text-gray-900" href="#">
+<span class="material-symbols-outlined text-2xl">list_alt</span>
+<span class="text-[10px] mt-1 font-medium">Order</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-400 hover:text-gray-900" href="#">
+<div class="w-10 h-10 bg-gray-900 rounded-full flex items-center justify-center shadow-lg transform -translate-y-3 border-4 border-gray-50">
+<span class="material-symbols-outlined text-white text-xl">smart_toy</span>
+</div>
+<span class="text-[10px] -mt-2 font-medium">AI</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-400 hover:text-gray-900" href="#">
+<span class="material-symbols-outlined text-2xl">edit_note</span>
+<span class="text-[10px] mt-1 font-medium">Input</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-900" href="#">
+<span class="material-symbols-outlined text-2xl fill-1">grid_view</span>
+<span class="text-[10px] mt-1 font-medium">Lain</span>
+</a>
+</div>
+</nav>
+
+</body></html>
