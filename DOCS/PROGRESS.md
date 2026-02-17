@@ -4,8 +4,8 @@
 
 ## Sesi Terakhir
 - **Tanggal**: 2026-02-18
-- **Fase**: MVP Build
-- **Status**: 🎉 ALL MVP FEATURES COMPLETE!
+- **Fase**: MVP Stabilization
+- **Status**: 🎉 ALL MVP FEATURES COMPLETE + CI GREEN!
 
 ---
 
@@ -59,7 +59,7 @@
 
 | ID | Nama | Status | PR |
 |----|------|--------|----|
-| (kosong — akan diisi saat build) | | | |
+| BUG-001 | Fix all compilation errors (DAO-Repo mismatch, Hilt DI, ChatMessage type) | ✅ | #27 |
 
 ---
 
@@ -70,7 +70,8 @@
 
 ## MVP Summary
 - 9 features (F001-F009) ✅
-- 25 PRs (#1-#25)
+- 25 PRs (#1-#25) + 1 bug fix (#27)
 - Tech: Kotlin, Jetpack Compose, Room, Hilt, Groq API
 - Architecture: Repository → UseCase → ViewModel → Screen
 - All offline-first except F008 (AI Chat requires internet)
+- CI: compileDebugKotlin ✅, hiltJavaCompileDebug ✅, lintDebug → pending
