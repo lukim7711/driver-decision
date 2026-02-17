@@ -3,7 +3,6 @@ package com.driverfinance.ui.screen.quickentry
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
@@ -15,21 +14,21 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
-import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ElevatedButton
+import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
@@ -43,6 +42,7 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -183,10 +183,11 @@ private fun CategoryGridContent(
             modifier = Modifier.weight(1f)
         ) {
             items(categories, key = { it.id }) { category ->
-                Card(
+                ElevatedCard(
                     modifier = Modifier
                         .aspectRatio(1f)
-                        .clickable { onCategoryClick(category) }
+                        .clickable { onCategoryClick(category) },
+                    shape = RoundedCornerShape(16.dp)
                 ) {
                     Column(
                         modifier = Modifier.fillMaxSize().padding(Spacing.sm),
@@ -200,7 +201,7 @@ private fun CategoryGridContent(
                         Spacer(modifier = Modifier.height(Spacing.xs))
                         Text(
                             text = category.name,
-                            style = MaterialTheme.typography.bodySmall,
+                            style = MaterialTheme.typography.labelMedium,
                             textAlign = TextAlign.Center
                         )
                     }
@@ -209,7 +210,10 @@ private fun CategoryGridContent(
         }
 
         Spacer(modifier = Modifier.height(Spacing.md))
-        Card(modifier = Modifier.fillMaxWidth()) {
+        ElevatedCard(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(16.dp)
+        ) {
             Column(modifier = Modifier.padding(Spacing.md)) {
                 Text(
                     text = "Hari ini: $todayCount $tabLabel",
@@ -254,41 +258,48 @@ private fun NominalSelectContent(
             )
         }
 
-        Spacer(modifier = Modifier.height(Spacing.md))
+        Spacer(modifier = Modifier.height(20.dp))
 
         FlowRow(
             horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
-            verticalArrangement = Arrangement.spacedBy(Spacing.sm)
+            verticalArrangement = Arrangement.spacedBy(Spacing.sm),
+            modifier = Modifier.fillMaxWidth()
         ) {
             presets.forEach { preset ->
-                FilledTonalButton(
+                ElevatedButton(
                     onClick = { if (!isSaving) onPresetClick(preset.amount) },
-                    enabled = !isSaving
+                    enabled = !isSaving,
+                    shape = RoundedCornerShape(12.dp)
                 ) {
-                    Text(formatRupiah(preset.amount))
+                    Text(
+                        text = formatRupiah(preset.amount),
+                        style = MaterialTheme.typography.titleSmall
+                    )
                 }
             }
         }
 
-        Spacer(modifier = Modifier.height(Spacing.sm))
+        Spacer(modifier = Modifier.height(Spacing.md))
         OutlinedButton(
             onClick = onCustomClick,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(12.dp)
         ) {
-            Text("Ketik nominal lain")
+            Text("\u270F\uFE0F Ketik nominal lain")
         }
 
-        Spacer(modifier = Modifier.height(Spacing.md))
+        Spacer(modifier = Modifier.height(20.dp))
         OutlinedTextField(
             value = note,
             onValueChange = onNoteChange,
             label = { Text("Catatan (opsional)") },
             modifier = Modifier.fillMaxWidth(),
-            singleLine = true
+            singleLine = true,
+            shape = RoundedCornerShape(12.dp)
         )
 
         Spacer(modifier = Modifier.height(48.dp))
-        OutlinedButton(
+        TextButton(
             onClick = onBack,
             modifier = Modifier.fillMaxWidth()
         ) {
@@ -316,7 +327,7 @@ private fun NumpadContent(
         modifier = modifier
             .fillMaxWidth()
             .verticalScroll(rememberScrollState())
-            .padding(Spacing.md),
+            .padding(horizontal = Spacing.md, vertical = Spacing.sm),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -330,11 +341,24 @@ private fun NumpadContent(
         }
 
         Spacer(modifier = Modifier.height(Spacing.md))
-        Text(
-            text = if (displayAmount > 0) "Rp${formatRupiah(displayAmount)}" else "Rp 0",
-            style = MaterialTheme.typography.headlineLarge,
-            fontWeight = FontWeight.Bold
-        )
+
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.surfaceVariant
+            ),
+            shape = RoundedCornerShape(16.dp)
+        ) {
+            Text(
+                text = if (displayAmount > 0) "Rp${formatRupiah(displayAmount)}" else "Rp 0",
+                style = MaterialTheme.typography.displaySmall,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 20.dp)
+            )
+        }
 
         Spacer(modifier = Modifier.height(Spacing.md))
 
@@ -351,44 +375,61 @@ private fun NumpadContent(
                 horizontalArrangement = Arrangement.spacedBy(Spacing.sm)
             ) {
                 row.forEach { key ->
-                    FilledTonalButton(
-                        onClick = { onDigit(key) },
-                        modifier = Modifier.weight(1f).height(48.dp)
-                    ) {
-                        Text(
-                            text = if (key == "DEL") "\u232B" else key,
-                            style = MaterialTheme.typography.titleMedium
-                        )
+                    val isSpecial = key == "DEL" || key == "000"
+                    if (isSpecial) {
+                        OutlinedButton(
+                            onClick = { onDigit(key) },
+                            modifier = Modifier.weight(1f).height(52.dp),
+                            shape = RoundedCornerShape(12.dp)
+                        ) {
+                            Text(
+                                text = if (key == "DEL") "\u232B" else key,
+                                style = MaterialTheme.typography.titleMedium
+                            )
+                        }
+                    } else {
+                        FilledTonalButton(
+                            onClick = { onDigit(key) },
+                            modifier = Modifier.weight(1f).height(52.dp),
+                            shape = RoundedCornerShape(12.dp)
+                        ) {
+                            Text(
+                                text = key,
+                                style = MaterialTheme.typography.titleMedium
+                            )
+                        }
                     }
                 }
             }
             Spacer(modifier = Modifier.height(Spacing.xs))
         }
 
-        Spacer(modifier = Modifier.height(Spacing.sm))
+        Spacer(modifier = Modifier.height(Spacing.md))
         OutlinedTextField(
             value = note,
             onValueChange = onNoteChange,
             label = { Text("Catatan (opsional)") },
             modifier = Modifier.fillMaxWidth(),
-            singleLine = true
+            singleLine = true,
+            shape = RoundedCornerShape(12.dp)
         )
 
-        Spacer(modifier = Modifier.height(Spacing.sm))
+        Spacer(modifier = Modifier.height(Spacing.md))
         Button(
             onClick = onSubmit,
             enabled = isValid && !isSaving,
-            modifier = Modifier.fillMaxWidth().height(52.dp)
+            modifier = Modifier.fillMaxWidth().height(52.dp),
+            shape = RoundedCornerShape(12.dp)
         ) {
-            Text("Simpan")
+            Text("Simpan", style = MaterialTheme.typography.titleMedium)
         }
 
         Spacer(modifier = Modifier.height(Spacing.xs))
-        OutlinedButton(
+        TextButton(
             onClick = onBack,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("\u2190 Kembali")
+            Text("\u2190 Kembali ke pilihan nominal")
         }
 
         Spacer(modifier = Modifier.height(Spacing.md))

@@ -19,8 +19,13 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        // Groq API key: reads from local.properties first, then env var fallback
-        val groqApiKey = project.findProperty("GROQ_API_KEY") as? String
+        // Groq API key: local.properties > gradle.properties > env var > empty
+        val localPropsFile = rootProject.file("local.properties")
+        val localProps = java.util.Properties().apply {
+            if (localPropsFile.exists()) load(localPropsFile.inputStream())
+        }
+        val groqApiKey = localProps.getProperty("GROQ_API_KEY")
+            ?: project.findProperty("GROQ_API_KEY") as? String
             ?: System.getenv("GROQ_API_KEY")
             ?: ""
         buildConfigField("String", "GROQ_API_KEY", "\"$groqApiKey\"")
