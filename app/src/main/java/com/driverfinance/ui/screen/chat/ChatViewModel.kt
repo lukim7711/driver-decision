@@ -5,6 +5,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.driverfinance.BuildConfig
 import com.driverfinance.data.remote.model.GroqMessage
 import com.driverfinance.domain.usecase.chat.ChatMessageResult
 import com.driverfinance.domain.usecase.chat.SendChatMessageUseCase
@@ -119,7 +120,7 @@ class ChatViewModel @Inject constructor(
                 is ChatMessageResult.Timeout -> {
                     newBubbles.map {
                         if (it.id == aiBubbleId) it.copy(
-                            content = "Gagal memproses. Coba lagi.",
+                            content = "Gagal memproses (timeout). Coba lagi.",
                             isLoading = false,
                             isError = true,
                             errorMessage = trimmed
@@ -127,9 +128,14 @@ class ChatViewModel @Inject constructor(
                     }
                 }
                 is ChatMessageResult.Error -> {
+                    val errorMsg = if (BuildConfig.GROQ_API_KEY.isBlank()) {
+                        "API key belum dikonfigurasi.\n\nTambahkan GROQ_API_KEY=gsk_xxx di file local.properties atau set environment variable, lalu rebuild app."
+                    } else {
+                        "Ada gangguan: ${result.message}"
+                    }
                     newBubbles.map {
                         if (it.id == aiBubbleId) it.copy(
-                            content = "Ada gangguan, coba beberapa saat lagi.",
+                            content = errorMsg,
                             isLoading = false,
                             isError = true,
                             errorMessage = trimmed
