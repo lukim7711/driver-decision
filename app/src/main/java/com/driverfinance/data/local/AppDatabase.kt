@@ -18,14 +18,16 @@ import com.driverfinance.data.local.entity.*
         AiCorrectionLogEntity::class,
         QuickEntryCategoryEntity::class,
         QuickEntryEntity::class,
+        QuickEntryPresetEntity::class,
         DebtEntity::class,
         DebtPaymentEntity::class,
         FixedExpenseEntity::class,
         WorkScheduleEntity::class,
-        AmbitiousModeEntity::class
+        AmbitiousModeEntity::class,
+        DailyTargetCacheEntity::class
     ],
     version = 1,
-    exportSchema = true
+    exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
 
@@ -43,6 +45,7 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract fun quickEntryCategoryDao(): QuickEntryCategoryDao
     abstract fun quickEntryDao(): QuickEntryDao
+    abstract fun quickEntryPresetDao(): QuickEntryPresetDao
 
     abstract fun debtDao(): DebtDao
     abstract fun debtPaymentDao(): DebtPaymentDao
@@ -50,4 +53,6 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun fixedExpenseDao(): FixedExpenseDao
     abstract fun workScheduleDao(): WorkScheduleDao
     abstract fun ambitiousModeDao(): AmbitiousModeDao
+
+    abstract fun dailyTargetCacheDao(): DailyTargetCacheDao
 }
